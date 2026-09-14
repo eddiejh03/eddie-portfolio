@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume — Wong Jun Hau</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='resume.css') }}">
+</head>
+<body>
+    <div class="background-grid" aria-hidden="true"></div>
+    <div class="background-glow" aria-hidden="true"></div>
+
+    <header class="site-header">
+        <div class="container nav">
+            <a href="/" class="logo"><span class="logo-symbol">&gt;_</span> eddie.dev/resume</a>
+            <nav class="nav-links">
+                <a href="/">Home</a>
+                <a href="/education">Education</a>
+                <a href="/experience">Experience</a>
+                <a href="/resume" class="active nav-contact">Resume / CV &rarr;</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container resume-page">
+
+        <div class="resume-header">
+            <div>
+                <p class="eyebrow">// DOCUMENT_VIEWER</p>
+                <h1>Curriculum Vitae<span class="accent">.</span></h1>
+                <p class="section-sub">Full preview below, or grab a copy to keep for your records.</p>
+            </div>
+
+            <div class="resume-actions">
+                <a href="/download-resume" class="button button-primary download-btn" download>
+                    <span class="btn-icon">&darr;</span>
+                    <span>Download PDF</span>
+                </a>
+                <a href="{{ url_for('static', filename='resume.pdf') }}" class="button button-secondary" target="_blank" rel="noopener">
+                    Open in new tab &nearr;
+                </a>
+            </div>
+        </div>
+
+        <div class="viewer-shell">
+            <div class="viewer-toolbar">
+                <div class="toolbar-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span class="toolbar-filename">resume_wong_jun_hau.pdf</span>
+                <a href="/download-resume" class="toolbar-download" title="Download" download>&darr;</a>
+            </div>
+
+            <div class="pdf-container">
+                <iframe
+                    src="{{ url_for('static', filename='resume.pdf') }}#toolbar=1&navpanes=0&view=FitH"
+                    type="application/pdf"
+                    loading="lazy"
+                    title="Resume preview">
+                    <div class="pdf-fallback">
+                        <p>Your browser can't preview this PDF inline.</p>
+                        <a href="/download-resume" class="button button-primary" download>Download instead</a>
+                    </div>
+                </iframe>
+            </div>
+        </div>
+
+        <p class="viewer-hint">Tip: use the toolbar inside the preview to zoom or jump between pages, or open it in a new tab for a full-screen view.</p>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>&copy; 2026 Wong Jun Hau (Eddie).</p>
+            <a href="/" class="back-to-top">Back to home</a>
+        </div>
+    </footer>
+
+</body>
+</html>

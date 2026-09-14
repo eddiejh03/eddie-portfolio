@@ -1,0 +1,294 @@
+/* =========================================================
+   EDUCATION PAGE — polished pass
+   Goal: tighter vertical rhythm, less flat empty space,
+   two-zone card layout, subtle glow + index accents.
+   ========================================================= */
+
+.education-page .section {
+    padding-top: 40px;
+}
+
+.edu-intro {
+    max-width: 640px;
+    margin-bottom: 2.5rem;
+}
+
+.edu-intro h1 {
+    margin: 0.4rem 0;
+}
+
+.edu-intro p {
+    margin-top: 0.6rem;
+}
+
+/* ---------- Tabs ---------- */
+
+.edu-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1.5rem 0 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    flex-wrap: wrap;
+}
+
+.edu-tab {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-family: inherit;
+    font-size: 0.9rem;
+    padding: 0.75rem 1.25rem;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.edu-tab .tab-num {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.edu-tab:hover {
+    color: #cbd5e1;
+}
+
+.edu-tab.is-active {
+    color: var(--accent, #a78bfa);
+}
+
+.edu-tab.is-active .tab-num {
+    color: var(--accent, #a78bfa);
+}
+
+.edu-tab.is-active::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent, #a78bfa);
+    border-radius: 2px;
+}
+
+.edu-tab:focus-visible {
+    outline: 2px solid var(--accent, #a78bfa);
+    outline-offset: 3px;
+}
+
+/* ---------- Panels ---------- */
+
+.edu-panels {
+    position: relative;
+}
+
+.edu-panels::before {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    background: radial-gradient(circle at 20% 20%, rgba(167, 139, 250, 0.06), transparent 60%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.edu-panel {
+    opacity: 0;
+    transform: translateY(8px);
+}
+
+.edu-panel.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .edu-panel { transition: none; }
+}
+
+/* ---------- Card: two-zone layout ---------- */
+
+.edu-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.edu-card-main {
+    min-width: 0;
+}
+
+.edu-card-top {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.edu-icon svg {
+    width: 22px;
+    height: 22px;
+    color: var(--accent, #a78bfa);
+}
+
+.edu-category {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: #94a3b8;
+    text-transform: uppercase;
+}
+
+.edu-card h3 {
+    font-size: 1.4rem;
+    margin: 0 0 0.25rem;
+}
+
+.edu-programme {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+
+.edu-note {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    font-style: italic;
+    margin: 0;
+}
+
+.edu-stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    padding-left: 2rem;
+}
+
+.edu-stat-label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: #64748b;
+    margin-bottom: 0.3rem;
+}
+
+.edu-stat strong {
+    font-size: 1.15rem;
+    color: #f1f5f9;
+}
+
+@media (max-width: 720px) {
+    .edu-card {
+        grid-template-columns: 1fr;
+    }
+    .edu-stat-row {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding-left: 0;
+        padding-top: 1.25rem;
+        margin-top: 1.25rem;
+    }
+}
+
+/* ---------- Certifications ---------- */
+
+.cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.cert-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 1.5rem 1.25rem 1.25rem;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.cert-card::before {
+    content: attr(data-index);
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.7rem;
+    color: rgba(167, 139, 250, 0.35);
+}
+
+.cert-card:hover {
+    border-color: rgba(167, 139, 250, 0.4);
+    transform: translateY(-2px);
+}
+
+.cert-icon svg {
+    width: 20px;
+    height: 20px;
+    color: var(--accent, #a78bfa);
+}
+
+.cert-type {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: #64748b;
+}
+
+.cert-card strong {
+    font-size: 0.95rem;
+    color: #f1f5f9;
+}
+
+.cert-meta {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+/* ---------- Next page CTA ---------- */
+
+.edu-next {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    margin: 3rem 0 2rem;
+    padding: 1.75rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.edu-next small {
+    display: block;
+    color: #94a3b8;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.4rem;
+}
+
+.edu-next h2 {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+@media (max-width: 600px) {
+    .edu-next {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
