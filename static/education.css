@@ -255,6 +255,43 @@
 .cert-meta {
     font-size: 0.8rem;
     color: #94a3b8;
+
+.cert-actions {
+    margin-top: auto;
+    padding-top: 0.8rem;
+}
+
+.cert-view {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: var(--accent, #a78bfa);
+    font-family: inherit;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.cert-view:hover {
+    color: #c4b5fd;
+}
+
+.cert-view span {
+    transition: transform 0.2s ease;
+}
+
+.cert-view:hover span {
+    transform: translate(2px, -2px);
+}
+
+.cert-view:focus-visible {
+    outline: 2px solid var(--accent, #a78bfa);
+    outline-offset: 4px;
+    border-radius: 3px;
+}
 }
 
 /* ---------- Next page CTA ---------- */
