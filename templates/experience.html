@@ -2,109 +2,381 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Experience — Wong Jun Hau</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Explore Eddie Wong’s experience in teaching, classroom work, and brand promotion.">
+    <title>Experience — Eddie Wong</title>
+    <!-- Shared site styles load first. Page-specific dark styles below take priority. -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='night-orbit-2026') }}">
+    <style>
+        /* A / COLOURS — shared black, white, and light-blue palette. */
+        .experience-theme {
+            --bg: #030507;
+            --text: #e9f3fa;
+            --muted: #a0b1bf;
+            --accent: #9edcff;
+            --border: #253641;
+            --font-heading: "Times New Roman", Times, serif;
+            --font-mono: Consolas, monospace;
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font: 16px/1.7 Arial, sans-serif;
+        }
+        .experience-theme * { box-sizing: border-box; }
+        .experience-theme [hidden] { display: none !important; }
+        .experience-theme a { color: inherit; text-decoration: none; }
+        .experience-theme .container { width: min(1160px, calc(100% - 48px)); margin: auto; }
+        .experience-theme h1, .experience-theme h2, .experience-theme h3 {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            line-height: 1.08;
+            letter-spacing: -.035em;
+        }
+        .experience-theme em { color: var(--accent); }
+        .experience-theme .eyebrow { color: var(--accent); font: 10px/1.6 var(--font-mono); letter-spacing: 1.5px; margin: 0; }
+        .experience-theme a:focus-visible, .experience-theme button:focus-visible, .role-panel:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 5px;
+        }
+
+        /* B / HEADER — the same visual language as the landing page. */
+        .experience-theme .site-header { background: rgba(3,5,7,.94); border-bottom: 1px solid #18242d; }
+        .experience-theme .nav { display: flex; justify-content: space-between; align-items: center; min-height: 86px; gap: 20px; }
+        .experience-theme .logo { font: 26px var(--font-heading); white-space: nowrap; }
+        .experience-theme .logo-symbol { color: var(--accent); font: 16px var(--font-mono); margin-right: 10px; }
+        .experience-theme .nav-links { display: flex; align-items: center; gap: 28px; font-size: 13px; }
+        .experience-theme .nav-links a { padding: 9px 0; color: var(--muted); }
+        .experience-theme .nav-links a:hover { color: var(--text); }
+        .experience-theme .nav-links .active { color: var(--accent); border-bottom: 1px solid var(--accent); }
+
+        /* C / INTRODUCTION — editorial heading and a decorative circular motif. */
+        .experience-intro { display: grid; grid-template-columns: 1fr 220px; gap: 35px; align-items: center; padding: 64px 0 50px; border-bottom: 1px solid var(--border); }
+        .experience-intro h1 { font-size: clamp(42px, 4.7vw, 64px); margin: 22px 0; }
+        .intro-copy { color: var(--muted); font-size: 14px; line-height: 1.8; margin: 0; }
+        .experience-orbit { position: relative; width: 210px; height: 210px; display: grid; place-items: center; }
+        .orbit-outline { position: absolute; inset: 0; border: 1px solid #8ad4ff30; border-radius: 50%; transform: rotate(-25deg) scaleY(.75); }
+        .orbit-core { display: grid; align-content: center; text-align: center; width: 150px; height: 150px; border-radius: 50%; border: 1px solid #81cfff50; background: radial-gradient(circle at 30% 20%, #214159, #08131e 70%); box-shadow: 0 0 50px #68bdff12; font: 23px/1.15 var(--font-heading); }
+        .orbit-point { position: absolute; border-radius: 50%; background: #ace3ff; box-shadow: 0 0 16px #9edcff66; }
+        .point-one { width: 10px; height: 10px; left: 9px; top: 85px; }
+        .point-two { width: 6px; height: 6px; right: 16px; top: 50px; }
+        .point-three { width: 4px; height: 4px; right: 58px; bottom: 35px; }
+
+        /* D / ROLE SELECTOR — selected, hover, and keyboard-focus states. */
+        .work-section { padding: 40px 0 0; }
+        .work-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; margin-bottom: 24px; }
+        .work-heading h2 { font-size: 34px; margin: 0; }
+        .interaction-hint { display: none; color: var(--muted); font: 10px var(--font-mono); margin: 0; }
+        .roles-ready .interaction-hint { display: block; }
+        .experience-browser { border: 1px solid #2a4355; border-radius: 12px; overflow: hidden; background: #080e14; }
+        .roles-ready .experience-browser { display: grid; grid-template-columns: 340px minmax(0, 1fr); }
+        .role-sidebar { background: #060b11; padding: 28px 20px; border-right: 1px solid var(--border); }
+        .role-sidebar > .eyebrow { margin: 0 12px 20px; }
+        .role-tabs { display: grid; gap: 10px; }
+        .role-tab { display: flex; align-items: center; gap: 13px; width: 100%; text-align: left; border: 1px solid transparent; border-radius: 8px; padding: 20px 13px; background: transparent; color: var(--text); cursor: pointer; transition: background .2s, border-color .2s; }
+        .role-tab:hover { background: #102130; border-color: #385a70; }
+        .role-tab[aria-selected="true"] { border-color: #54809b; background: linear-gradient(120deg, #183348, #0c1924); box-shadow: inset 3px 0 var(--accent); }
+        .role-number { font: 10px var(--font-mono); color: var(--accent); align-self: flex-start; margin-top: 3px; }
+        .role-tab-copy { display: flex; flex-direction: column; gap: 8px; flex: 1; }
+        .role-tab-org { font: 10px/1.5 Arial, sans-serif; color: var(--muted); }
+        .role-tab-title { font: 21px/1.15 var(--font-heading); }
+        .role-arrow { color: var(--accent); font-size: 16px; }
+        .sidebar-note { color: #90a6b7; font: 10px/1.8 var(--font-mono); margin: 28px 12px 0; }
+
+        /* E / ROLE DETAILS — the original experience content is kept here. */
+        .role-detail { padding: 32px 38px 22px; min-width: 0; background: radial-gradient(ellipse at top right, #15324940, transparent 65%); }
+        .role-panel { padding-bottom: 30px; }
+        .roles-ready .role-panel { min-height: 415px; animation: show-role .25s ease-out; }
+        .role-meta { display: flex; justify-content: space-between; gap: 12px; align-items: center; font: 10px/1.7 var(--font-mono); color: var(--muted); }
+        .role-status { padding: 4px 9px; border-radius: 20px; border: 1px solid #35596f; background: #102636; color: var(--accent); font-size: 9px; letter-spacing: 1px; }
+        .role-employer { color: var(--accent); font: 12px/1.5 var(--font-mono); margin: 30px 0 10px; }
+        .role-panel h2 { font-size: clamp(30px, 3vw, 40px); margin: 0 0 26px; max-width: 550px; }
+        .responsibilities h3 { font-size: 23px; margin: 0 0 14px; }
+        .responsibilities ul { list-style: none; padding: 0; margin: 0; }
+        .responsibilities li { position: relative; padding-left: 20px; margin: 0 0 12px; color: #bacbd7; font-size: 13px; line-height: 1.8; }
+        .responsibilities li::before { content: ''; position: absolute; left: 0; top: 10px; width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+        .role-skills { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+        .skill-tags span { padding: 5px 9px; border: 1px solid #2b4557; border-radius: 4px; color: #bbd9ec; background: #0c1a25; font: 10px/1.6 Arial, sans-serif; }
+        .role-controls { border-top: 1px solid var(--border); padding-top: 18px; display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+        #role-position { color: var(--accent); font: 10px var(--font-mono); letter-spacing: 2px; }
+        .role-controls > div { display: flex; gap: 8px; }
+        .role-controls button { border: 1px solid #345368; border-radius: 5px; padding: 9px 12px; background: #0d1c28; color: #d3eeff; cursor: pointer; font: 11px/1.5 Arial, sans-serif; }
+        .role-controls button:hover { border-color: var(--accent); background: #19384e; }
+        @keyframes show-role { from { opacity: .3; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* F / NEXT STEPS AND FOOTER */
+        .experience-next { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 32px 0; margin: 48px 0; border-bottom: 1px solid var(--border); }
+        .experience-next h2 { font-size: 36px; margin: 12px 0 0; }
+        .next-links { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; font-size: 12px; color: var(--accent); }
+        .next-links a:hover { text-decoration: underline; text-underline-offset: 5px; }
+        .next-links .resume-link { background: var(--accent); color: #06121b; padding: 12px 18px; border-radius: 5px; }
+        .experience-theme .footer { border-top: 1px solid var(--border); padding: 25px 0; color: var(--muted); font-size: 11px; }
+        .experience-theme .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+
+        /* G / MOBILE — role buttons stay visible above the selected details. */
+        @media (max-width: 900px) {
+            .roles-ready .experience-browser { grid-template-columns: 280px minmax(0, 1fr); }
+            .role-detail { padding: 26px 24px 20px; }
+            .role-sidebar { padding: 26px 14px; }
+            .role-tab { gap: 9px; padding: 18px 12px; }
+            .experience-intro { grid-template-columns: 1fr 180px; }
+            .experience-orbit { transform: scale(.85); transform-origin: right center; width: 180px; }
+        }
+        @media (max-width: 700px) {
+            .experience-theme .container { width: calc(100% - 32px); }
+            .experience-theme .site-header { position: relative; }
+            .experience-theme .nav { align-items: flex-start; flex-direction: column; min-height: auto; padding: 18px 0; gap: 12px; }
+            .experience-theme .nav-links { gap: 16px; flex-wrap: wrap; font-size: 12px; }
+            .experience-intro { grid-template-columns: 1fr; padding: 36px 0; gap: 0; }
+            .experience-intro h1 { font-size: clamp(38px, 8vw, 52px); }
+            .experience-orbit { display: none; }
+            .intro-copy { font-size: 13px; }
+            .work-heading { flex-direction: column; align-items: flex-start; gap: 12px; }
+            .work-heading h2 { font-size: 31px; }
+            .roles-ready .experience-browser { grid-template-columns: 1fr; }
+            .role-sidebar { border-right: 0; border-bottom: 1px solid var(--border); padding: 20px 16px; }
+            .role-sidebar > .eyebrow { margin-left: 0; margin-bottom: 14px; }
+            .role-tabs { gap: 6px; }
+            .role-tab { padding: 12px; }
+            .role-tab-title { font-size: 19px; }
+            .role-tab-copy { gap: 4px; }
+            .sidebar-note { display: none; }
+            .role-detail { padding: 24px 20px 20px; }
+            .roles-ready .role-panel { min-height: 0; }
+            .role-meta { flex-wrap: wrap; }
+            .role-panel h2 { font-size: 32px; }
+            .experience-next { flex-direction: column; align-items: flex-start; gap: 24px; margin: 30px 0; }
+            .experience-next h2 { font-size: 32px; }
+            .role-controls button { padding: 9px; font-size: 10px; }
+            .experience-theme .footer-inner { flex-wrap: wrap; }
+        }
+
+        /* H / ACCESSIBILITY — avoid movement when the device requests it. */
+        @media (prefers-reduced-motion: reduce) {
+            .experience-theme * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+        }
+
+    </style>
 </head>
-<body>
+<body class="experience-theme" id="top">
+    <!--
+        EDITING GUIDE
+        01 Navigation: page links.
+        02 Introduction: heading and summary.
+        03 Role selector: short labels for each role.
+        04 Role panels: dates, organisations, responsibilities, and skills.
+        05 Next steps: links to education and resume.
+        06 JavaScript: role selection, arrow keys, and previous/next buttons.
+        Keep each role-tab-N paired with role-panel-N when editing IDs.
+    -->
+
+    <!-- 01 / NAVIGATION — matches the landing page. -->
     <header class="site-header">
         <div class="container nav">
-<a href="/" class="logo">
-
-    <!-- Purple terminal symbol.
-         CSS targets this using .logo-symbol -->
-    <span class="logo-symbol">&gt;_</span>
-
-    <!-- Website name.
-         CSS targets this using .logo-name.
-         It stays white. -->
-    <span class="logo-name">eddie.dev</span>
-
-    <!-- Current page name.
-         CSS targets this using .logo-path.
-         It becomes grey. -->
-    <span class="logo-path">/experience</span>
-
-</a>            <nav class="nav-links">
-                <a href="/">Home</a>
+            <a href="/" class="logo"><span class="logo-symbol">[ e. ]</span>Eddie Wong</a>
+            <nav class="nav-links" aria-label="Main navigation">
+                <a href="/">Overview</a>
                 <a href="/education">Education</a>
-                <a href="/experience" class="active">Experience</a>
-                <a href="/resume" class="nav-contact">Resume / CV &rarr;</a>
+                <a href="/experience" class="active" aria-current="page">Experience</a>
+                <a href="/resume">Résumé studio ↗</a>
             </nav>
         </div>
     </header>
 
-    <main class="container section">
-        <div class="section-heading">
-            <p class="eyebrow">// WORK_HISTORY</p>
-            <h2>Professional Experience</h2>
-            <p class="section-sub">A timeline of teaching, promotion, and classroom work since 2019.</p>
-        </div>
+    <main class="container experience-content">
+        <!-- 02 / INTRODUCTION -->
+        <section class="experience-intro" aria-labelledby="page-title">
+            <div>
+                <p class="eyebrow">02 / PEOPLE, PRACTICE &amp; EXPERIENCE</p>
+                <h1 id="page-title">Working with people.<br><em>Growing through practice.</em></h1>
+                <p class="intro-copy">Teaching, classroom work, and brand promotion since 2019.<br>Different settings. A shared focus on communication.</p>
+            </div>
+            <!-- Decorative orbit echoes the circles on the landing page. -->
+            <div class="experience-orbit" aria-hidden="true">
+                <span class="orbit-outline"></span>
+                <span class="orbit-core">People<br><em>at the centre.</em></span>
+                <span class="orbit-point point-one"></span>
+                <span class="orbit-point point-two"></span>
+                <span class="orbit-point point-three"></span>
+            </div>
+        </section>
 
-        <div class="timeline">
-
-            <div class="timeline-item">
-                <div class="timeline-marker">
-                    <span class="dot"></span>
-                    <span class="line"></span>
-                </div>
-                <div class="card">
-                    <div class="card-topline">
-                        <span class="badge badge-current">CURRENT</span>
-                        <span class="date">Jun 2025 &ndash; Present</span>
+        <section class="work-section" aria-labelledby="work-heading">
+            <div class="work-heading">
+                <h2 id="work-heading">Explore my <em>experience.</em></h2>
+                <p class="interaction-hint">Choose a role to see the details <span aria-hidden="true">↘</span></p>
+            </div>
+            <div class="experience-browser">
+                <!-- 03 / ROLE SELECTOR — JavaScript enables tabs after the page loads. -->
+                <aside class="role-sidebar" hidden>
+                    <p class="eyebrow">THE ROLES / 03</p>
+                    <div class="role-tabs" role="tablist" aria-label="Work experience" aria-orientation="vertical">
+                    <!-- Role 1: change the button label here if you rename the role. -->
+                    <button class="role-tab" id="role-tab-0" type="button" role="tab"
+                            aria-controls="role-panel-0" aria-selected="true"
+                            tabindex="0" data-role="0">
+                        <span class="role-number">01</span>
+                        <span class="role-tab-copy"><span class="role-tab-org">FC Tuition Centre</span><span class="role-tab-title">English &amp; Piano Teacher</span></span>
+                        <span class="role-arrow" aria-hidden="true">↗</span>
+                    </button>
+                    <!-- Role 2: change the button label here if you rename the role. -->
+                    <button class="role-tab" id="role-tab-1" type="button" role="tab"
+                            aria-controls="role-panel-1" aria-selected="false"
+                            tabindex="-1" data-role="1">
+                        <span class="role-number">02</span>
+                        <span class="role-tab-copy"><span class="role-tab-org">SJKC Yoke Nam</span><span class="role-tab-title">Substitute Teacher (English)</span></span>
+                        <span class="role-arrow" aria-hidden="true">↗</span>
+                    </button>
+                    <!-- Role 3: change the button label here if you rename the role. -->
+                    <button class="role-tab" id="role-tab-2" type="button" role="tab"
+                            aria-controls="role-panel-2" aria-selected="false"
+                            tabindex="-1" data-role="2">
+                        <span class="role-number">03</span>
+                        <span class="role-tab-copy"><span class="role-tab-org">Nationwide / Freelance</span><span class="role-tab-title">Brand Promoter</span></span>
+                        <span class="role-arrow" aria-hidden="true">↗</span>
+                    </button>
                     </div>
-                    <h3>English &amp; Piano Teacher</h3>
-                    <p class="org">FC Tuition Centre</p>
-                    <ul class="bullet-list">
-                        <li>Designed lesson plans and mock exam papers adopted centre-wide.</li>
-                        <li>Built weekly practice trackers to monitor student preparation and study habits.</li>
-                        <li>Ran regular progress updates with parents and fellow teachers.</li>
-                    </ul>
+                    <p class="sidebar-note">Select a role above.<br>Use arrow keys when navigating by keyboard.</p>
+                </aside>
+
+                <!-- 04 / ROLE DETAILS — all roles remain readable if JavaScript is unavailable. -->
+                <div class="role-detail">
+                <!-- ROLE 1: edit the dates, organisation, responsibilities, and skill labels below. -->
+                <article class="role-panel" id="role-panel-0" role="tabpanel"
+                         aria-labelledby="role-tab-0" tabindex="0">
+                    <div class="role-meta"><span class="role-status">CURRENT</span><span>Jun 2025 &ndash; Present</span></div>
+                    <p class="role-employer">FC Tuition Centre</p>
+                    <h2>English &amp; Piano Teacher</h2>
+                    <div class="responsibilities">
+                        <h3>What I <em>contribute.</em></h3>
+                        <ul>
+                            <li>Designed lesson plans and mock exam papers adopted centre-wide.</li>
+                            <li>Built weekly practice trackers to monitor student preparation and study habits.</li>
+                            <li>Ran regular progress updates with parents and fellow teachers.</li>
+                        </ul>
+                    </div>
+                    <div class="role-skills">
+                        <p class="eyebrow">SKILLS IN PRACTICE</p>
+                        <div class="skill-tags">
+                            <span>Lesson planning</span>
+                            <span>Assessment design</span>
+                            <span>Parent communication</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ROLE 2: edit the dates, organisation, responsibilities, and skill labels below. -->
+                <article class="role-panel" id="role-panel-1" role="tabpanel"
+                         aria-labelledby="role-tab-1" tabindex="0">
+                    <div class="role-meta"><span class="role-status">CONTRACT</span><span>Aug 2025 &ndash; Jan 2026</span></div>
+                    <p class="role-employer">SJKC Yoke Nam</p>
+                    <h2>Substitute Teacher (English)</h2>
+                    <div class="responsibilities">
+                        <h3>What I <em>contribute.</em></h3>
+                        <ul>
+                            <li>Delivered the primary English curriculum and held a calm, structured classroom.</li>
+                            <li>Logged lesson content and student progress for continuity between sessions.</li>
+                        </ul>
+                    </div>
+                    <div class="role-skills">
+                        <p class="eyebrow">SKILLS IN PRACTICE</p>
+                        <div class="skill-tags">
+                            <span>Classroom management</span>
+                            <span>English teaching</span>
+                            <span>Progress tracking</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ROLE 3: edit the dates, organisation, responsibilities, and skill labels below. -->
+                <article class="role-panel" id="role-panel-2" role="tabpanel"
+                         aria-labelledby="role-tab-2" tabindex="0">
+                    <div class="role-meta"><span class="role-status">ONGOING</span><span>Dec 2019 &ndash; Present</span></div>
+                    <p class="role-employer">Nationwide / Freelance</p>
+                    <h2>Brand Promoter</h2>
+                    <div class="responsibilities">
+                        <h3>What I <em>contribute.</em></h3>
+                        <ul>
+                            <li>Promoted 100+ brands across roadshows, retail outlets, and live events.</li>
+                            <li>Engaged customers directly through demonstrations, sampling, and persuasive pitching.</li>
+                        </ul>
+                    </div>
+                    <div class="role-skills">
+                        <p class="eyebrow">SKILLS IN PRACTICE</p>
+                        <div class="skill-tags">
+                            <span>Brand representation</span>
+                            <span>Product demonstrations</span>
+                            <span>Customer engagement</span>
+                        </div>
+                    </div>
+                </article>
+                    <div class="role-controls" hidden>
+                        <span id="role-position" aria-live="polite">01 / 03</span>
+                        <div>
+                            <button type="button" id="previous-role" aria-label="Previous experience">← <span>Previous</span></button>
+                            <button type="button" id="next-role" aria-label="Next experience"><span>Next role</span> →</button>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <div class="timeline-item">
-                <div class="timeline-marker">
-                    <span class="dot"></span>
-                    <span class="line"></span>
-                </div>
-                <div class="card">
-                    <div class="card-topline">
-                        <span class="badge">CONTRACT</span>
-                        <span class="date">Aug 2025 &ndash; Jan 2026</span>
-                    </div>
-                    <h3>Substitute Teacher (English)</h3>
-                    <p class="org">SJKC Yoke Nam</p>
-                    <ul class="bullet-list">
-                        <li>Delivered the primary English curriculum and held a calm, structured classroom.</li>
-                        <li>Logged lesson content and student progress for continuity between sessions.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-marker">
-                    <span class="dot"></span>
-                </div>
-                <div class="card">
-                    <div class="card-topline">
-                        <span class="badge badge-current">ONGOING</span>
-                        <span class="date">Dec 2019 &ndash; Present</span>
-                    </div>
-                    <h3>Brand Promoter</h3>
-                    <p class="org">Nationwide / Freelance</p>
-                    <ul class="bullet-list">
-                        <li>Promoted 100+ brands across roadshows, retail outlets, and live events.</li>
-                        <li>Engaged customers directly through demonstrations, sampling, and persuasive pitching.</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
+        <!-- 05 / NEXT STEPS -->
+        <section class="experience-next" aria-label="Explore more of my portfolio">
+            <div><p class="eyebrow">KEEP EXPLORING</p><h2>The story <em>continues.</em></h2></div>
+            <div class="next-links"><a href="/education">My qualifications ↗</a><a href="/resume" class="resume-link">View résumé ↗</a></div>
+        </section>
     </main>
 
-    <footer class="container footer">
-        <span>&copy; 2026 Wong Jun Hau (Eddie).</span>
-        <a href="/">Back to Home</a>
-    </footer>
+    <footer class="footer"><div class="container footer-inner"><span>© 2026 Wong Jun Hau (Eddie)</span><a href="#top">Back to top ↑</a></div></footer>
+
+    <!-- 06 / INTERACTION — no external JavaScript libraries needed. -->
+    <script>
+        (() => {
+            const tabs = [...document.querySelectorAll('.role-tab')];
+            const panels = [...document.querySelectorAll('.role-panel')];
+            const position = document.getElementById('role-position');
+            let selectedRole = 0;
+
+            // Show one role, update its selected button, and announce its position.
+            function selectRole(index, focusTab = false) {
+                // Wrap around: going past the final role returns to the first.
+                selectedRole = (index + tabs.length) % tabs.length;
+                tabs.forEach((tab, tabIndex) => {
+                    const isSelected = tabIndex === selectedRole;
+                    tab.setAttribute('aria-selected', String(isSelected));
+                    tab.tabIndex = isSelected ? 0 : -1;
+                    panels[tabIndex].hidden = !isSelected;
+                });
+                position.textContent = `${String(selectedRole + 1).padStart(2, '0')} / ${String(tabs.length).padStart(2, '0')}`;
+                if (focusTab) tabs[selectedRole].focus();
+            }
+
+            // Mouse/touch selection and accessible keyboard navigation.
+            tabs.forEach((tab, index) => {
+                tab.addEventListener('click', () => selectRole(index));
+                tab.addEventListener('keydown', event => {
+                    let next;
+                    if (['ArrowDown', 'ArrowRight'].includes(event.key)) next = selectedRole + 1;
+                    else if (['ArrowUp', 'ArrowLeft'].includes(event.key)) next = selectedRole - 1;
+                    else if (event.key === 'Home') next = 0;
+                    else if (event.key === 'End') next = tabs.length - 1;
+                    else return;
+                    event.preventDefault();
+                    selectRole(next, true);
+                });
+            });
+
+            // Previous and next controls stay in place as the content changes.
+            document.getElementById('previous-role').addEventListener('click', () => selectRole(selectedRole - 1));
+            document.getElementById('next-role').addEventListener('click', () => selectRole(selectedRole + 1));
+
+            // Only switch to the interactive layout once its controls are ready.
+            selectRole(0);
+            document.querySelector('.role-sidebar').hidden = false;
+            document.querySelector('.role-controls').hidden = false;
+            document.body.classList.add('roles-ready');
+        })();
+    </script>
 </body>
 </html>

@@ -1,83 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume — Wong Jun Hau</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='resume.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050709">
+  <title>Résumé studio — Eddie Wong</title>
+  <!-- All page styles are here: no changes to your shared style.css are needed. -->
+  <style>
+    /* 01. Theme — change these variables to adjust the studio colours. */
+    :root { color-scheme: dark; --bg:#050709; --panel:#0c1117; --blue:#a8daff; --text:#f3f6fa; --muted:#a1aebc; --line:rgba(168,218,255,.16); --serif:Georgia,'Times New Roman',serif; --sans:Arial,Helvetica,sans-serif; }
+    * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:var(--sans); font-size:14px; line-height:1.6; }
+    a { color:inherit; text-decoration:none; }
+    button,input { font:inherit; }
+    button,a,label { -webkit-tap-highlight-color:transparent; }
+    button { cursor:pointer; }
+    :focus-visible { outline:2px solid var(--blue); outline-offset:5px; }
+    .container { width:min(1220px,calc(100% - 80px)); margin-inline:auto; }
+    /* 02. Navigation — existing Flask routes are preserved. */
+    .site-header { border-bottom:1px solid var(--line); background:rgba(5,7,9,.92); }
+    .nav { min-height:88px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .logo { display:flex; align-items:center; gap:14px; font-family:var(--serif); font-size:21px; white-space:nowrap; }
+    .logo-symbol { color:var(--blue); font-family:var(--sans); font-size:20px; }
+    .nav-links { display:flex; gap:30px; font-size:13px; }
+    .nav-links a { color:var(--muted); padding:10px 0; transition:color .2s; }
+    .nav-links a:hover,.nav-links .active { color:var(--blue); }
+    .nav-links .active { box-shadow:0 1px var(--blue); }
+    /* 03. Heading — white serif type, light-blue emphasis, restrained glow. */
+    .resume-page { padding-top:66px; position:relative; }
+    .resume-page::before { content:''; position:absolute; z-index:-1; top:0; right:0; width:60%; height:500px; background:radial-gradient(ellipse at top,rgba(98,178,240,.09),transparent 68%); pointer-events:none; }
+    .resume-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:36px; }
+    .eyebrow { margin:0 0 16px; color:var(--blue); font-size:10px; letter-spacing:.2em; font-weight:600; text-transform:uppercase; }
+    h1 { margin:0; font-family:var(--serif); font-weight:400; font-size:clamp(42px,5.3vw,68px); line-height:1.09; letter-spacing:-.045em; }
+    .accent { color:var(--blue); font-weight:400; }
+    .section-sub { color:var(--muted); margin:21px 0 0; max-width:450px; font-size:14px; }
+    .local-badge { display:flex; align-items:center; gap:9px; color:var(--muted); font-size:11px; white-space:nowrap; padding-bottom:6px; }
+    .local-badge::before { content:''; width:6px; height:6px; background:var(--blue); border-radius:50%; box-shadow:0 0 12px #a8daff55; }
+    /* 04. Toolbar — primary actions stay visible; backup controls are grouped. */
+    .studio-toolbar { border-block:1px solid var(--line); padding:19px 0; display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:34px; }
+    .toolbar-buttons { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }
+    .button { display:inline-flex; align-items:center; justify-content:center; min-height:43px; padding:10px 17px; border:1px solid var(--line); border-radius:8px; color:var(--text); background:#101720; font-size:12px; line-height:1.4; transition:background .2s,border-color .2s; cursor:pointer; }
+    .button:hover { border-color:#a8daff80; background:#192531; }
+    .button-primary { background:var(--blue); color:#07121b; border-color:var(--blue); font-weight:600; }
+    .button-primary:hover { background:#cae9ff; }
+    #edit-toggle[aria-pressed="true"] { color:var(--blue); border-color:var(--blue); }
+    .draft-options { position:relative; }
+    .draft-options summary { list-style:none; color:var(--muted); background:transparent; }
+    .draft-options summary::-webkit-details-marker { display:none; }
+    .draft-menu { position:absolute; top:calc(100% + 8px); left:0; width:210px; padding:7px; border:1px solid var(--line); border-radius:10px; background:#101720; box-shadow:0 16px 40px #0009; z-index:5; }
+    .draft-menu button { width:100%; text-align:left; background:none; border:0; color:var(--text); padding:12px; border-radius:5px; font-size:12px; }
+    .draft-menu button:hover { background:#1c2a38; }
+    .draft-menu #reset { color:#efb7b7; border-top:1px solid var(--line); border-radius:0; }
+    #status { font-size:11px; color:var(--muted); margin:0; max-width:270px; }
+    /* 05. Workspace — a compact guide beside the A4 document. */
+    .studio-layout { display:grid; grid-template-columns:210px minmax(0,1fr); gap:40px; align-items:start; }
+    .editor-help { padding-top:39px; }
+    .editor-help h2 { margin:0 0 24px; font:400 26px/1.2 var(--serif); }
+    .help-step { border-top:1px solid var(--line); padding-top:17px; margin-bottom:22px; }
+    .help-step h3 { font-size:12px; font-weight:500; margin:0 0 7px; }
+    .step-number { font-size:10px; color:var(--blue); margin-right:10px; }
+    .help-step p { margin:0; font-size:12px; color:var(--muted); line-height:1.8; }
+    .editor-help .button { width:100%; margin-bottom:18px; }
+    .card-link { display:block; color:var(--blue); font-size:12px; padding-top:17px; border-top:1px solid var(--line); }
+    .paper-wrap { min-width:0; padding-bottom:60px; }
+    .paper-label { display:flex; justify-content:space-between; gap:10px; margin:0 0 12px; font-size:9px; letter-spacing:.15em; color:var(--muted); }
+    .paper-label span:first-child { color:var(--blue); }
+    /* 06. Résumé — white paper and Times New Roman remain easy to print. */
+    .resume-paper { color-scheme:light; background:white; color:#171d24; width:100%; min-height:1050px; padding:55px 60px; font-family:'Times New Roman',Times,serif; font-size:12pt; line-height:1.38; box-shadow:0 24px 70px #0006; border-top:3px solid var(--blue); overflow-wrap:anywhere; }
+    .document-header { text-align:center; padding-bottom:19px; border-bottom:1px solid #283d50; }
+    .document-header h2 { font-size:25pt; font-weight:400; line-height:1.18; margin:0 0 8px; }
+    .document-header p { margin:5px 0 0; font-size:11pt; }
+    .document-header [data-field="contact"] { color:#485563; font-size:10pt; }
+    .document-section { position:relative; margin-top:20px; }
+    .document-section h3 { font-size:11pt; text-transform:uppercase; letter-spacing:.09em; color:#223f55; border-bottom:1px solid #dce3e8; padding-bottom:5px; margin:0 0 9px; break-after:avoid; }
+    .document-body { white-space:pre-wrap; }
+    [data-field] { white-space:pre-wrap; }
+    [contenteditable="true"] { outline:1px dashed #94bad2; outline-offset:4px; border-radius:2px; min-height:1em; }
+    [contenteditable="true"]:focus { outline:2px solid #4389ba; background:#f5faff; }
+    .section-tools { display:flex; justify-content:flex-end; gap:5px; margin:0 0 10px; font-family:var(--sans); }
+    .section-tools button { border:1px solid #c6d7e2; background:#f0f7fc; color:#294b64; border-radius:4px; padding:4px 9px; font-size:10px; min-height:28px; }
+    .section-tools button:disabled { opacity:.35; cursor:default; }
+    .footer { border-top:1px solid var(--line); }
+    .footer-inner { padding-block:24px; display:flex; justify-content:space-between; gap:16px; color:var(--muted); font-size:11px; }
+    .footer a { color:var(--blue); }
+    /* 07. Tablet and phone layouts. */
+    @media(max-width:1000px) { .container { width:calc(100% - 48px); } .studio-layout { grid-template-columns:170px minmax(0,1fr); gap:25px; } .resume-paper { padding:40px 32px; } .studio-toolbar { align-items:flex-start; flex-direction:column; } #status { max-width:none; } }
+    @media(max-width:720px) { .container { width:calc(100% - 32px); } .nav { align-items:flex-start; flex-direction:column; gap:12px; padding:20px 0 14px; } .nav-links { width:100%; justify-content:space-between; gap:10px; font-size:11px; } .resume-page { padding-top:38px; } .resume-heading { align-items:flex-start; flex-direction:column; } .local-badge { display:none; } .studio-layout { display:flex; flex-direction:column; gap:22px; } .editor-help { padding:0; width:100%; } .editor-help>.eyebrow,.editor-help>h2,.help-step { display:none; } .card-link { border:0; padding:0; } .editor-help .button { width:auto; margin:0 12px 12px 0; } .paper-wrap { width:100%; } .resume-paper { padding:30px 23px; min-height:0; font-size:10.5pt; } .document-header h2 { font-size:22pt; } .paper-label { font-size:8px; } .toolbar-buttons { gap:7px; } .button { padding:10px 12px; } .footer-inner { flex-wrap:wrap; } }
+    @media(prefers-reduced-motion:reduce) { * { transition:none !important; } }
+    /* 08. PDF/print — hide the entire studio and print only the document. */
+    @page { size:A4; margin:15mm; }
+    @media print {
+      :root { color-scheme:light; }
+      body { background:white !important; }
+      .site-header,.resume-heading,.studio-toolbar,.editor-help,.paper-label,.footer,.section-tools { display:none !important; }
+      .resume-page::before { display:none; }
+      .container,.resume-page,.studio-layout,.paper-wrap { display:block; width:100%; max-width:none; margin:0; padding:0; }
+      .resume-paper { width:auto; min-height:0; padding:0; border:0; box-shadow:none; font-size:11pt; }
+      .document-section { margin-top:15px; }
+      [contenteditable] { outline:none !important; background:transparent !important; }
+      .document-body { orphans:3; widows:3; }
+    }
+  </style>
 </head>
 <body>
-    <div class="background-grid" aria-hidden="true"></div>
-    <div class="background-glow" aria-hidden="true"></div>
+  <!-- SITE NAVIGATION -->
+  <header class="site-header">
+    <div class="container nav">
+      <a href="/" class="logo"><span class="logo-symbol">[ e. ]</span> Eddie Wong</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="/">Overview</a><a href="/education">Education</a><a href="/experience">Experience</a>
+        <a href="/resume" class="active" aria-current="page">Résumé studio ↗</a>
+      </nav>
+    </div>
+  </header>
+  <main class="container resume-page">
+    <!-- PAGE INTRODUCTION -->
+    <div class="resume-heading">
+      <div>
+        <p class="eyebrow">03 / Résumé studio</p>
+        <h1>Your next chapter,<br><em class="accent">on paper.</em></h1>
+        <p class="section-sub">A little refinement. A clear introduction.<br>Make your next opportunity yours.</p>
+      </div>
+      <span class="local-badge">Your workspace · Saved on this device</span>
+    </div>
+    <!-- EDITOR ACTIONS -->
+    <div class="studio-toolbar">
+      <div class="toolbar-buttons">
+        <button type="button" class="button" id="edit-toggle" aria-pressed="false">Edit my résumé</button>
+        <button type="button" class="button button-primary" id="print">Download PDF ↓</button>
+        <details class="draft-options">
+          <summary class="button">Draft options ⌄</summary>
+          <div class="draft-menu">
+            <button type="button" id="backup">Export editable copy ↗</button>
+            <button type="button" id="import-button">Import editable copy</button>
+            <button type="button" id="reset">Reset draft</button>
+          </div>
+        </details>
+        <input id="restore" type="file" accept="application/json,.json" hidden>
+      </div>
+      <p id="status" role="status" aria-live="polite">Edits stay in this browser.</p>
+    </div>
+    <div class="studio-layout">
+      <!-- WORKSPACE GUIDE -->
+      <aside class="editor-help" aria-label="Editor instructions">
+        <p class="eyebrow">The workspace</p><h2>Make it yours.</h2>
+        <div class="help-step"><h3><span class="step-number">01</span> Refine your story</h3><p>Choose “Edit my résumé”, then click any text on the paper. Use a new line for each bullet.</p></div>
+        <div class="help-step"><h3><span class="step-number">02</span> Keep a copy</h3><p>Your draft saves here as you type. Use Draft options to export a backup or import a saved copy.</p></div>
+        <div class="help-step"><h3><span class="step-number">03</span> Ready to send</h3><p>Download PDF opens the print window. Choose Save as PDF, A4, and turn off headers and footers.</p></div>
+        <button type="button" class="button" id="add-section" hidden>+ Add section</button>
+        <a class="card-link" href="{{ url_for('static', filename='resume.pdf') }}" target="_blank" rel="noopener">Open existing résumé ↗</a>
+      </aside>
+      <!-- LIVE RÉSUMÉ DOCUMENT -->
+      <div class="paper-wrap">
+        <div class="paper-label"><span>THE DOCUMENT / A4</span><span>TIMES NEW ROMAN</span></div>
+        <article id="paper" class="resume-paper" aria-label="Editable résumé preview">
+          <header class="document-header">
+            <h2 data-field="name">Wong Jun Hau (Eddie)</h2>
+            <p data-field="headline">Nutrition Student · Educator</p>
+            <p data-field="contact">eddiejh03@gmail.com · Malaysia</p>
+          </header>
+          <div id="resume-sections"></div>
+        </article>
+        <noscript>Please enable JavaScript to view and edit this résumé, or open the existing résumé PDF.</noscript>
+      </div>
+    </div>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><span>© 2026 Wong Jun Hau (Eddie)</span><a href="mailto:eddiejh03@gmail.com">Let’s connect ↗</a></div></footer>
+  <script>
+    (() => {
+      'use strict';
+      // 01. Default résumé content. Edit this object to change the public profile.
+      // The same storage key keeps drafts saved by your previous page.
+      const STORAGE_KEY = 'eddie-resume-blue-v1';
+      const defaults = {
+        name: 'Wong Jun Hau (Eddie)',
+        headline: 'Nutrition Student · Educator',
+        contact: 'eddiejh03@gmail.com · Malaysia',
+        sections: [
+          { title: 'Profile', body: 'Nutrition with Wellness undergraduate and full scholarship recipient with experience in education, customer engagement, and technology learning.' },
+          { title: 'Education', body: 'UCSI University — BSc (Hons.) Nutrition with Wellness\nCGPA: 3.46 / 4.00 · Expected graduation: May 2027\nFull Scholarship — Sin Chew Daily Education Fund\n\nAsia Pacific University — Foundation Programme\nCGPA: 3.91 / 4.00 · Completed 2023\n\nSPM — 11A (consolidated best grades across attempts) · 2025' },
+          { title: 'Experience', body: 'English & Piano Teacher — FC Tuition Centre | Jun 2025–Present\n• Designed lesson plans and mock exam papers adopted centre-wide.\n• Built weekly practice trackers and delivered parent progress updates.\n\nSubstitute Teacher (English) — SJKC Yoke Nam | Aug 2025–Jan 2026\n• Delivered the primary English curriculum and documented progress.\n\nBrand Promoter — Nationwide / Freelance | Dec 2019–Present\n• Promoted 100+ brands through demonstrations, sampling, and live events.' },
+          { title: 'Certifications', body: 'IBM — Python for Data Science, AI & Development · Sep 2026\nIBM — Developing AI Applications with Python and Flask · Sep 2026\nHRCI — Talent Acquisition · 2026\nABRSM — Grade 8 Piano Practical (Pass); Grade 5 Theory (Merit)' },
+          { title: 'Skills', body: 'Lesson planning · Classroom communication · Customer engagement\nPython · Flask' }
+        ]
+      };
+      const $ = id => document.getElementById(id);
+      const status = $('status');
+      const menu = document.querySelector('.draft-options');
+      let data = structuredClone(defaults);
+      let editing = false;
 
-    <header class="site-header">
-        <div class="container nav">
-            <a href="/" class="logo"><span class="logo-symbol">&gt;_</span> eddie.dev/resume</a>
-            <nav class="nav-links">
-                <a href="/">Home</a>
-                <a href="/education">Education</a>
-                <a href="/experience">Experience</a>
-                <a href="/resume" class="active nav-contact">Resume / CV &rarr;</a>
-            </nav>
-        </div>
-    </header>
+      // 02. Validate imports and restore an existing browser draft.
+      function valid(value) {
+        return value && ['name', 'headline', 'contact'].every(key =>
+          typeof value[key] === 'string' && value[key].length < 10000
+        ) && Array.isArray(value.sections) && value.sections.length <= 50 &&
+          value.sections.every(section => section &&
+            typeof section.title === 'string' && section.title.length < 10000 &&
+            typeof section.body === 'string' && section.body.length < 100000);
+      }
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const stored = JSON.parse(raw);
+          if (valid(stored)) {
+            data = stored;
+            // Correct only the old UCSI CGPA; leave other custom draft text intact.
+            data.sections.forEach(section => {
+              if (section.title.trim().toLowerCase() === 'education' && section.body.includes('UCSI')) {
+                section.body = section.body.replace('CGPA: 3.40 / 4.00', 'CGPA: 3.46 / 4.00');
+              }
+            });
+            status.textContent = 'Your saved draft is ready.';
+          } else { status.textContent = 'Saved draft could not be loaded. Showing the default profile.'; }
+        }
+      } catch { status.textContent = 'Browser storage unavailable. Export a copy to keep your changes.'; }
+      function save() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+          status.textContent = 'Saved in this browser · ' + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+        } catch { status.textContent = 'Changes are in memory only. Export a copy to keep them.'; }
+      }
 
-    <main class="container resume-page">
+      // 03. Text editing. Paste as plain text to keep résumé formatting consistent.
+      function editable(element, label, update) {
+        element.contentEditable = String(editing);
+        element.spellcheck = editing;
+        if (editing) element.setAttribute('aria-label', 'Edit ' + label);
+        element.addEventListener('input', () => { update(element.innerText); save(); });
+        element.addEventListener('paste', event => {
+          if (!editing) return;
+          event.preventDefault();
+          const selection = window.getSelection();
+          if (!selection || !selection.rangeCount) return;
+          const range = selection.getRangeAt(0);
+          if (!element.contains(range.commonAncestorContainer)) return;
+          range.deleteContents();
+          const text = document.createTextNode(event.clipboardData.getData('text/plain'));
+          range.insertNode(text);
+          range.setStartAfter(text);
+          range.collapse(true);
+          selection.removeAllRanges();
+          selection.addRange(range);
+          element.dispatchEvent(new Event('input'));
+        });
+      }
 
-        <div class="resume-header">
-            <div>
-                <p class="eyebrow">// DOCUMENT_VIEWER</p>
-                <h1>Curriculum Vitae<span class="accent">.</span></h1>
-                <p class="section-sub">Full preview below, or grab a copy to keep for your records.</p>
-            </div>
+      // 04. Render the header and each section; use textContent for imported text.
+      function render() {
+        document.querySelectorAll('[data-field]').forEach(old => {
+          const field = old.dataset.field;
+          const fresh = old.cloneNode(false);
+          fresh.textContent = data[field];
+          fresh.removeAttribute('aria-label');
+          old.replaceWith(fresh);
+          editable(fresh, field, value => { data[field] = value; });
+        });
+        const host = $('resume-sections');
+        host.replaceChildren();
+        data.sections.forEach((section, index) => {
+          const block = document.createElement('section');
+          block.className = 'document-section';
+          const controls = document.createElement('div');
+          controls.className = 'section-tools';
+          controls.hidden = !editing;
+          const actions = [
+            { text:'↑', label:'Move ' + section.title + ' up', disabled:index === 0, run:() => {
+              [data.sections[index-1], data.sections[index]] = [data.sections[index], data.sections[index-1]];
+            } },
+            { text:'↓', label:'Move ' + section.title + ' down', disabled:index === data.sections.length-1, run:() => {
+              [data.sections[index+1], data.sections[index]] = [data.sections[index], data.sections[index+1]];
+            } },
+            { text:'Remove', label:'Remove ' + section.title, disabled:false, run:() => data.sections.splice(index, 1) }
+          ];
+          actions.forEach(action => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.textContent = action.text;
+            button.disabled = action.disabled;
+            button.setAttribute('aria-label', action.label);
+            button.onclick = () => {
+              if (action.text === 'Remove' && !confirm('Remove this section from your draft?')) return;
+              action.run(); save(); render();
+            };
+            controls.append(button);
+          });
+          const heading = document.createElement('h3');
+          heading.textContent = section.title;
+          const body = document.createElement('div');
+          body.className = 'document-body';
+          body.textContent = section.body;
+          editable(heading, section.title + ' heading', value => { section.title = value; });
+          editable(body, section.title + ' content', value => { section.body = value; });
+          block.append(controls, heading, body);
+          host.append(block);
+        });
+        $('add-section').hidden = !editing;
+        $('edit-toggle').textContent = editing ? 'Finish editing ✓' : 'Edit my résumé';
+        $('edit-toggle').setAttribute('aria-pressed', String(editing));
+      }
 
-            <div class="resume-actions">
-                <a href="/download-resume" class="button button-primary download-btn" download>
-                    <span class="btn-icon">&darr;</span>
-                    <span>Download PDF</span>
-                </a>
-                <a href="{{ url_for('static', filename='resume.pdf') }}" class="button button-secondary" target="_blank" rel="noopener">
-                    Open in new tab &nearr;
-                </a>
-            </div>
-        </div>
-
-        <div class="viewer-shell">
-            <div class="viewer-toolbar">
-                <div class="toolbar-dots">
-                    <span></span><span></span><span></span>
-                </div>
-                <span class="toolbar-filename">resume_wong_jun_hau.pdf</span>
-                <a href="/download-resume" class="toolbar-download" title="Download" download>&darr;</a>
-            </div>
-
-            <div class="pdf-container">
-                <iframe
-                    src="{{ url_for('static', filename='resume.pdf') }}#toolbar=1&navpanes=0&view=FitH"
-                    type="application/pdf"
-                    loading="lazy"
-                    title="Resume preview">
-                    <div class="pdf-fallback">
-                        <p>Your browser can't preview this PDF inline.</p>
-                        <a href="/download-resume" class="button button-primary" download>Download instead</a>
-                    </div>
-                </iframe>
-            </div>
-        </div>
-
-        <p class="viewer-hint">Tip: use the toolbar inside the preview to zoom or jump between pages, or open it in a new tab for a full-screen view.</p>
-
-    </main>
-
-    <footer class="footer">
-        <div class="container footer-inner">
-            <p>&copy; 2026 Wong Jun Hau (Eddie).</p>
-            <a href="/" class="back-to-top">Back to home</a>
-        </div>
-    </footer>
-
+      // 05. Toolbar: edit, add, print, export, import and reset.
+      $('edit-toggle').onclick = () => { editing = !editing; render(); };
+      $('add-section').onclick = () => {
+        if (data.sections.length >= 50) { status.textContent = 'Maximum of 50 sections reached.'; return; }
+        data.sections.push({title:'New section', body:'Add your details here.'});
+        save(); render();
+        const heading = $('resume-sections').lastElementChild.querySelector('h3');
+        heading.focus();
+      };
+      $('print').onclick = () => { document.activeElement.blur(); menu.open = false; window.print(); };
+      $('backup').onclick = () => {
+        const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url; link.download = 'Eddie-resume-editable.json';
+        document.body.append(link); link.click(); link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        menu.open = false;
+      };
+      $('import-button').onclick = () => { menu.open = false; $('restore').click(); };
+      $('restore').onchange = async event => {
+        const file = event.target.files[0];
+        if (!file) return;
+        try {
+          if (file.size > 5000000) throw new Error('File too large');
+          const imported = JSON.parse(await file.text());
+          if (!valid(imported)) throw new Error('Invalid résumé data');
+          if (!confirm('Replace your current draft with this imported copy?')) return;
+          data = imported; save(); render();
+        } catch { status.textContent = 'Could not import this file. Choose a résumé JSON exported from this page.'; }
+        finally { event.target.value = ''; }
+      };
+      $('reset').onclick = () => {
+        if (confirm('Reset all résumé changes to the original profile?')) {
+          data = structuredClone(defaults); save(); render();
+        }
+        menu.open = false;
+      };
+      document.addEventListener('click', event => { if (!menu.contains(event.target)) menu.open = false; });
+      document.addEventListener('keydown', event => { if (event.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); } });
+      render();
+    })();
+  </script>
 </body>
 </html>

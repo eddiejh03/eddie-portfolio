@@ -1,466 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wong Jun Hau (Eddie) — Portfolio</title>
-    <meta name="description" content="Portfolio of Wong Jun Hau (Eddie), Nutrition with Wellness student, educator, and aspiring managerial intern.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio — Eddie Wong</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='minimal-orbit-2026') }}">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='hub-1') }}">
+  <style>
+    /* 01 / PAGE FLOW */
+    body.described-landing {
+      background: #030507;
+      color: #e9f3fa;
+      height: auto;
+      min-height: 100svh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      display: block;
+      margin: 0; /* Ensure no default margin gaps */
+    }
 
-    <style>
+    /* 02 / TOP NAVIGATION PANEL */
+    .top-panel {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+      background: rgba(3, 5, 7, 0.9);
+      border-bottom: 1px solid #17436950;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+    }
+    .top-panel a {
+      color: #9edcff;
+      text-decoration: none;
+      font: 13px/1.5 Consolas, monospace;
+      letter-spacing: 1px;
+      transition: color 0.2s ease;
+    }
+    .top-panel a:hover {
+      color: #fff;
+    }
 
-body.hub-home{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
-.hub-home .site-header{flex:0 0 auto}
-.hub-main{position:relative;z-index:1;flex:1 0 auto;min-height:0;width:100%;padding:12px 24px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.hub-heading{text-align:center;flex:0 0 auto}
-.hub-heading .eyebrow{margin:0 0 7px;font-size:13px}
-.hub-heading h1{margin:0;font-size:clamp(24px,2.8vw,34px);letter-spacing:-.7px;line-height:1.3}
-.hub-heading p:last-child{margin:8px 0 0;color:var(--subtle);font-size:15px}
-.hub-map{position:relative;isolation:isolate;width:min(100%,1050px);height:min(610px,calc(100dvh - 205px));min-height:390px;margin:0 auto}
-.hub-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;color:rgba(183,154,255,.27)}
-.hub-lines line{stroke:currentColor;stroke-width:1.5;stroke-dasharray:5 6;vector-effect:non-scaling-stroke;transition:stroke .25s,opacity .25s;animation:dash-flow 22s linear infinite}
-.hub-map:has(.hub-node:hover) .hub-lines line{opacity:.35}
-.hub-map:has(.hub-education:hover) .line-education,.hub-map:has(.hub-experience:hover) .line-experience,.hub-map:has(.hub-resume:hover) .line-resume,.hub-map:has(.hub-contact:hover) .line-contact{stroke:var(--accent);opacity:1}
+    /* 03 / INTRODUCTION */
+    .described-landing .home-introduction {
+      width: min(850px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 46px 0 30px;
+      text-align: center;
+    }
+    .home-eyebrow {
+      margin: 0 0 14px;
+      color: #9edcff;
+      font: 10px/1.7 Consolas, monospace;
+      letter-spacing: 2px;
+    }
+    .home-introduction h1 {
+      margin: 0 0 17px;
+      font: 400 clamp(38px, 4.4vw, 62px)/1.05 "Times New Roman", Times, serif;
+      letter-spacing: -.035em;
+    }
+    .home-introduction em, .home-portrait-caption em { color: #9edcff; }
+    .home-description {
+      max-width: 600px;
+      margin: 0 auto;
+      color: #afc2d0;
+      font: 14px/1.8 Arial, sans-serif;
+    }
 
-/* ---- Floating motion wrapper ---- */
-.hub-float-wrap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;animation:float-gentle 6s ease-in-out infinite;display:flex;flex-direction:column;align-items:center;text-align:center;width:clamp(190px,25vw,270px)}
+    /* 04 / PORTRAIT AREA (Circles removed) */
+    .described-landing .orbit-stage {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      margin: 0;
+      padding: 0 18px 88px;
+    }
+    .described-landing .orbit-scene {
+      position: relative;
+      width: min(1050px, 100%);
+      height: 350px;
+      min-height: 0;
+      margin: 0 auto;
+    }
+    .described-landing .portrait-core {
+      position: absolute;
+      width: 230px;
+      left: 50%;
+      top: 40%;
+      transform: translate(-50%, -50%);
+    }
+    .described-landing .portrait-circle { width: 230px; height: 230px; }
+    .home-portrait-caption {
+      position: absolute;
+      top: calc(100% + 15px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 260px;
+      text-align: center;
+    }
+    .home-portrait-caption p { margin: 0 0 6px; font: 29px/1.1 "Times New Roman", Times, serif; }
+    .home-portrait-caption > span { color: #9aafbf; font: 9px/1.6 Consolas, monospace; letter-spacing: 2px; }
 
-/* Circle now holds ONLY the photo, full-bleed */
-.hub-center{position:relative;z-index:2;width:clamp(150px,19vw,205px);aspect-ratio:1;border-radius:50%;border:3px solid transparent;background:linear-gradient(#151b26,#151b26) padding-box,conic-gradient(from 0deg,#a78bfa,#7dd3fc,#f472b6,#a78bfa) border-box;box-shadow:0 0 0 6px rgba(167,139,250,.12),0 0 45px rgba(139,92,246,.35);overflow:hidden}
-.hub-center::before{content:"";position:absolute;inset:-11px;border:1.5px dashed rgba(167,139,250,.4);border-radius:50%;pointer-events:none;animation:spin-slow 40s linear infinite;z-index:1}
-.hub-avatar{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;border-radius:50%;background:#fff;display:block}
+    /* 05 / MOBILE ADJUSTMENTS */
+    @media (max-width: 700px) {
+      .described-landing .home-introduction { padding-top: 28px; }
+      .home-eyebrow { font-size: 8px; letter-spacing: 1.4px; }
+      .home-introduction h1 { font-size: clamp(33px, 7vw, 44px); }
+      .home-description { font-size: 13px; }
+      .desktop-break { display: none; }
+      .described-landing .orbit-scene { height: 350px; max-width: 480px; }
+      .described-landing .portrait-core { top: 40%; width: 154px; }
+      .described-landing .portrait-circle { width: 154px; height: 154px; }
+      .home-portrait-caption { width: 190px; top: calc(100% + 12px); }
+      .home-portrait-caption p { font-size: 25px; }
+      .home-portrait-caption > span { font-size: 8px; letter-spacing: 1px; }
+      .top-panel { gap: 15px; flex-wrap: wrap; }
+      .top-panel a { font-size: 11px; }
+    }
 
-/* Text now sits BELOW the circle, not inside it */
-.hub-text{margin-top:18px}
-.hub-text h2{margin:0 0 6px;font-size:clamp(19px,2.4vw,26px);line-height:1.25;letter-spacing:-.5px}
-.hub-subtitle{color:var(--accent);font:600 13px var(--font-mono)}
-.hub-status{display:block;margin-top:11px;color:var(--subtle);font:13px var(--font-mono)}
-
-.hub-node{position:absolute;z-index:3;width:clamp(160px,21vw,215px);aspect-ratio:1;border-radius:50%;padding:20px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:7px;border:2px solid #4a4560;background:#171d29;color:var(--text);box-shadow:0 10px 35px rgba(0,0,0,.12),inset 0 0 0 1px rgba(167,139,250,.08);transition:transform .25s,border-color .25s,background .25s,box-shadow .25s}
-.hub-node:hover,.hub-node:focus-visible{transform:translate(-50%,-50%) scale(1.055) translateY(0) !important;border-color:#a78bfa;background:#242137;box-shadow:0 0 40px rgba(167,139,250,.4),0 0 0 3px rgba(167,139,250,.15)}
-.hub-node:focus-visible{outline:2px solid var(--accent);outline-offset:5px}
-
-/* Ambient pulse ring behind each node */
-.hub-node::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:1px solid rgba(183,154,255,.15);animation:pulse-ring 4s ease-in-out infinite;pointer-events:none}
-.hub-education::after{animation-delay:0s}
-.hub-experience::after{animation-delay:1s}
-.hub-resume::after{animation-delay:2s}
-.hub-contact::after{animation-delay:3s}
-
-.node-icon{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;border:1px solid rgba(183,154,255,.2);background:rgba(183,154,255,.07);color:var(--accent);transition:transform .25s}
-.hub-node:hover .node-icon,.hub-node:focus-visible .node-icon{transform:translateY(-3px)}
-.node-icon svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.hub-node strong{font-size:clamp(16px,1.9vw,20px);line-height:1.25}
-.node-description{max-width:150px;color:var(--subtle);font-size:13px;line-height:1.5}
-.node-arrow{color:var(--accent);font:600 13px var(--font-mono)}
-
-.hub-education{left:17%;top:23%;transform:translate(-50%,-50%);animation:float-gentle 6.5s ease-in-out infinite;animation-delay:.15s}
-.hub-experience{left:83%;top:23%;transform:translate(-50%,-50%);animation:float-gentle 6.5s ease-in-out infinite;animation-delay:.6s}
-.hub-resume{left:17%;top:77%;transform:translate(-50%,-50%);animation:float-gentle 6.5s ease-in-out infinite;animation-delay:1.05s}
-.hub-contact{left:83%;top:77%;transform:translate(-50%,-50%);animation:float-gentle 6.5s ease-in-out infinite;animation-delay:1.5s}
-
-@keyframes float-gentle{0%,100%{translate:0 0}50%{translate:0 -8px}}
-@keyframes spin-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-@keyframes dash-flow{to{stroke-dashoffset:-120}}
-@keyframes pulse-ring{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.08);opacity:0}}
-
-.hub-home .command-dock{z-index:1000;left:auto;right:24px;bottom:24px}
-.hub-home .command-launcher{width:62px;height:62px;padding:0;border-radius:50%;justify-content:center;background:#211b30}
-.hub-home .command-launcher svg{width:25px;height:25px}
-.hub-home .launcher-label{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.hub-home .command-launcher .launcher-dot{position:absolute;right:8px;top:8px;width:7px;height:7px}
-@media(min-width:701px) and (min-height:640px){body.hub-home{height:100vh;height:100dvh;overflow:hidden}.hub-home .hub-main{flex:1 1 auto}}
-@media(max-height:760px) and (min-width:701px){
-.hub-heading p:last-child{display:none}.hub-map{height:min(500px,calc(100dvh - 155px))}
-.hub-center{width:clamp(130px,17vw,165px)}.hub-text{margin-top:12px}.hub-text h2{font-size:16px}.hub-status{margin-top:7px;font-size:11px}
-.hub-node{width:clamp(140px,18.5vw,175px);padding:16px;gap:5px}.node-icon{width:31px;height:31px}.node-icon svg{width:20px;height:20px}.node-description{font-size:12px}}
-@media(max-width:700px){
-.hub-home .hub-main{padding:36px 16px 90px;justify-content:flex-start}
-.hub-map{width:min(100%,440px);height:auto;min-height:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:center;justify-items:center;padding-top:24px}
-.hub-lines{display:none}
-.hub-float-wrap{position:relative;left:auto;top:auto;transform:none;grid-column:1/-1;grid-row:1;margin-bottom:20px;animation:none;width:auto}
-.hub-center{width:min(190px,55vw)}
-.hub-node{position:relative;left:auto;top:auto;transform:none;width:min(100%,185px);padding:16px;animation:none}.hub-node:hover,.hub-node:focus-visible{transform:scale(1.035) !important}
-.hub-education{grid-column:1;grid-row:2}.hub-experience{grid-column:2;grid-row:2}.hub-resume{grid-column:1;grid-row:3}.hub-contact{grid-column:2;grid-row:3}
-.hub-home .command-dock{right:16px;bottom:16px;left:auto}.hub-home .command-launcher{width:56px;height:56px}}
-@media(max-width:380px){.hub-node{padding:10px}.node-description{font-size:10px}.node-icon{width:32px;height:32px}}
-@media(prefers-reduced-motion:reduce){
-.hub-node,.node-icon,.hub-lines line,.hub-float-wrap,.hub-education,.hub-experience,.hub-resume,.hub-contact,.hub-center::before,.hub-node::after{animation:none !important;transition:none}
-}
-
-
-/* Command Center: explicit hidden state and reliable stacking. */
-.command-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-    background: rgba(0, 0, 0, .48);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-}
-.command-backdrop[hidden],
-.command-panel[hidden] {
-    display: none !important;
-}
-.hub-home .command-dock {
-    position: fixed;
-    z-index: 1000;
-}
-.hub-home .command-panel {
-    position: relative;
-    z-index: 1;
-}
-.hub-home .command-close {
-    position: relative;
-    z-index: 2;
-    cursor: pointer;
-}
-
-</style>
+    /* 06 / PERSONAL BACKGROUND */
+    .personal-sky {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 8% 32%, #17436930, transparent 40%),
+        radial-gradient(ellipse at 94% 70%, #153b5728, transparent 42%);
+    }
+    .personal-sky svg { width: 100%; height: 100%; display: block; }
+    .described-landing .home-introduction,
+    .described-landing .orbit-stage { position: relative; z-index: 1; }
+    .described-landing .chat-launcher { z-index: 30; }
+    .described-landing .chat-panel { z-index: 31; }
+    .sky-stars { fill: #b8e6ff; }
+    .sky-constellations { fill: none; stroke: #8bd4ff; stroke-width: .8; opacity: .23; }
+    .sky-nodes { fill: #b4e5ff; opacity: .55; }
+    .sky-drift { animation: quiet-drift 34s ease-in-out infinite alternate; }
+    .sky-drift-slow { animation: quiet-drift 47s ease-in-out -15s infinite alternate-reverse; }
+    .sky-symbols { fill: none; stroke: #9edcff; stroke-width: 1.1; opacity: .23; }
+    .sky-symbols text { fill: #9edcff; stroke: none; font-family: Consolas, monospace; }
+    .sky-control {
+      position: fixed;
+      bottom: 22px;
+      left: 22px;
+      z-index: 20;
+      padding: 8px 12px;
+      border: 1px solid #9edcff35;
+      border-radius: 20px;
+      color: #a7bfd0;
+      background: #07111be6;
+      font: 10px/1.5 Consolas, monospace;
+      cursor: pointer;
+    }
+    .sky-control:hover { color: #e2f4ff; border-color: #9edcff80; }
+    .sky-control:focus-visible { outline: 2px solid #9edcff; outline-offset: 4px; }
+    .quiet-paused .sky-drift,
+    .quiet-paused .sky-drift-slow { animation-play-state: paused !important; }
+    @keyframes quiet-drift {
+      from { transform: translate(0, 0); }
+      to { transform: translate(8px, -10px); }
+    }
+    @media (max-width: 700px) {
+      .sky-symbols { opacity: .15; }
+      .sky-constellations { opacity: .18; }
+      .sky-control { left: 12px; bottom: 18px; font-size: 9px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sky-drift, .sky-drift-slow { animation: none !important; }
+    }
+  </style>
 </head>
+<body class="landing-page minimal-landing described-landing">
+  
+  <!-- NEW TOP PANEL NAVIGATION -->
+  <nav class="top-panel" aria-label="Main Navigation">
+    <a href="/">Home</a>
+    <a href="/education">Education</a>
+    <a href="/experience">Experience</a>
+    <a href="/resume">Résumé</a>
+    <a href="mailto:eddiejh03@gmail.com">Contact</a>
+  </nav>
 
-<body id="top" class="hub-home">
+  <!-- BACKGROUND: constellations, piano keys, and code symbols -->
+  <div class="personal-sky" aria-hidden="true">
+    <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <g class="sky-stars">
+          <circle cx="1081" cy="436" r="1" opacity="0.36" />
+          <circle cx="605" cy="190" r="1" opacity="0.16" />
+          <circle cx="237" cy="39" r="1.3" opacity="0.19" />
+          <circle cx="528" cy="525" r="1.3" opacity="0.16" />
+          <circle cx="293" cy="576" r="0.8" opacity="0.14" />
+      </g>
+      <g class="sky-drift">
+        <g class="sky-constellations">
+          <path d="M46 100 L120 157 L196 119 L254 213 L192 287 L85 255 L120 157 M192 287 L226 358" />
+        </g>
+        <g class="sky-nodes">
+          <circle cx="46" cy="100" r="2"/><circle cx="120" cy="157" r="2.5"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <button class="sky-control" id="sky-control" type="button" aria-pressed="false" hidden>Pause motion</button>
 
-    <!-- ==================== BACKGROUND ==================== -->
-    <div class="background-grid" aria-hidden="true"></div>
-    <div class="background-glow" aria-hidden="true"></div>
-
-    <!-- ==================== NAVIGATION ==================== -->
-    <header class="site-header">
-        <div class="container nav">
-            <a href="/" class="logo">
-                <span class="logo-symbol">&gt;_</span>
-                <span class="logo-name">eddie<span class="accent">.</span>dev</span>
-                <span class="logo-path">/home</span>
-            </a>
-
-            <nav class="nav-links" aria-label="Main navigation">
-                <a href="/" class="active" aria-current="page">Home</a>
-                <a href="/education">Education</a>
-                <a href="/experience">Experience</a>
-                <a href="/resume" class="nav-contact">Resume / CV <span>↗</span></a>
-            </nav>
+  <!-- HOME: introduction and circular portrait -->
+  <header class="home-introduction">
+    <p class="home-eyebrow">THE PERSONAL PORTFOLIO / EDDIE WONG</p>
+    <h1>A curious mind.<br><em>A world of possibilities.</em></h1>
+    <p class="home-description">I’m Wong Jun Hau — Eddie. A nutrition student and educator,<br class="desktop-break">
+      exploring technology through learning and building.</p>
+  </header>
+  <main class="orbit-stage" aria-label="Eddie Wong’s portfolio">
+    <div class="orbit-scene" aria-label="Explore my portfolio">
+      
+      <div class="portrait-core">
+        <div class="portrait-circle">
+          <img src="{{ url_for('static', filename='profile.jpg') }}" alt="Portrait of Eddie Wong" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+          <span class="portrait-initials" hidden>ew.</span>
         </div>
-    </header>
+        <div class="home-portrait-caption"><p>Eddie <em>Wong</em></p><span>LEARN · BUILD · CONNECT</span></div>
+      </div>
 
-    <main class="hub-main" id="main-content">
-<div class="hub-heading"><p class="eyebrow"><span class="accent">01.</span> / PORTFOLIO_HUB</p><h1>Explore my world<span class="accent">.</span></h1><p>Select a node to continue.</p></div>
-<div class="hub-map" aria-label="Portfolio navigation">
-<svg class="hub-lines" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
-<line class="line-education" x1="500" y1="300" x2="170" y2="138"/>
-<line class="line-experience" x1="500" y1="300" x2="830" y2="138"/>
-<line class="line-resume" x1="500" y1="300" x2="170" y2="462"/>
-<line class="line-contact" x1="500" y1="300" x2="830" y2="462"/>
-</svg>
-<div class="hub-float-wrap">
-<div class="hub-center"><img class="hub-avatar" src="{{ url_for('static', filename='profile.jpg') }}" alt="Portrait of Wong Jun Hau (Eddie)"></div>
-<div class="hub-text"><h2>Wong Jun Hau<br><span class="accent">(Eddie)</span></h2><span class="hub-subtitle">NUTRITION · WELLNESS</span><span class="hub-status"><span class="online-dot"></span> MY / SG</span></div>
-</div>
-<a class="hub-node hub-education" href="/education"><span class="node-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c3.5 2.5 8.5 2.5 12 0v-5"/></svg></span><strong>Education</strong><span class="node-description">Academic journey &amp; qualifications</span><span class="node-arrow">Explore ↗</span></a>
-<a class="hub-node hub-experience" href="/experience"><span class="node-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg></span><strong>Experience</strong><span class="node-description">Teaching, work &amp; leadership</span><span class="node-arrow">Explore ↗</span></a>
-<a class="hub-node hub-resume" href="/resume"><span class="node-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h8"/></svg></span><strong>Resume / CV</strong><span class="node-description">Skills &amp; professional profile</span><span class="node-arrow">View ↗</span></a>
-<a class="hub-node hub-contact" href="mailto:eddiejh03@gmail.com"><span class="node-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></span><strong>Contact</strong><span class="node-description">Internship &amp; collaboration</span><span class="node-arrow">Connect ↗</span></a>
-</div><span id="year" hidden></span>
-</main>
+    </div>
+  </main>
+  
+  <!-- CHAT: fixed bottom-right launcher -->
+  <button class="chat-launcher" id="chat-launcher" type="button" aria-controls="chat-panel" aria-expanded="false">✧ AI chat</button>
+  <section class="chat-panel" id="chat-panel" aria-labelledby="chat-title" hidden>
+    <div class="chat-header">
+      <div><h2 id="chat-title">Ask about Eddie</h2><p>Portfolio assistant</p></div>
+      <button id="chat-close" type="button" aria-label="Close chat">×</button>
+    </div>
+    <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+    <p class="chat-status" id="chat-status" role="status"></p>
+    
+    <!-- HARDCODED ENDPOINT: Changed data-endpoint to /chat to unlock the UI -->
+    <form class="chat-form" id="chat-form" data-endpoint="/chat">
+      <input id="chat-input" aria-label="Your message" placeholder="Ask about Eddie…" maxlength="2000" autocomplete="off" required>
+      <button id="chat-send" type="submit">Send</button>
+    </form>
+  </section>
 
-<!-- ==================== FLOATING COMMAND CENTER ==================== -->
-    <div class="command-backdrop" id="command-backdrop" hidden></div>
-    <aside class="command-dock" aria-label="Command Center">
-
-        <div class="command-panel" id="command-panel" hidden>
-
-            <div class="command-panel-header">
-                <div class="command-panel-title">
-                    <svg viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="1.7"
-                         stroke-linecap="round" stroke-linejoin="round"
-                         aria-hidden="true">
-                        <rect x="3" y="4" width="18" height="16" rx="2"/>
-                        <path d="M7 9l3 3-3 3M13 15h4"/>
-                    </svg>
-                    <span>guest@eddie-terminal</span>
-                </div>
-
-                <button type="button"
-                        class="command-close"
-                        id="command-close"
-                        aria-label="Close Command Center">
-                    &times;
-                </button>
-            </div>
-
-            <div class="command-panel-body">
-
-                <div class="command-output" id="command-output" aria-live="polite">
-                    <p class="command-muted">Eddie Portfolio System [Version 1.0]</p>
-                    <p>Welcome, visitor. Type <span class="command-highlight">help</span> to see available commands.</p>
-                </div>
-
-                <form class="command-form" id="command-form">
-                    <label for="command-input" class="command-prompt">
-                        visitor@portfolio:~$
-                    </label>
-
-                    <input
-                        type="text"
-                        id="command-input"
-                        class="command-input"
-                        placeholder="type a command..."
-                        autocomplete="off"
-                        spellcheck="false"
-                    >
-
-                    <button type="submit" class="command-run" aria-label="Run command">
-                        ↵
-                    </button>
-                </form>
-
-            </div>
-
-            <div class="command-quick">
-                <span class="command-quick-label">QUICK ACCESS</span>
-
-                <div class="command-quick-buttons">
-                    <button type="button" data-command="about">About</button>
-                    <button type="button" data-command="education">Education</button>
-                    <button type="button" data-command="experience">Experience</button>
-                    <button type="button" data-command="resume">Resume</button>
-                    <button type="button" data-command="contact">Contact</button>
-                    <button type="button" data-command="clear">Clear</button>
-                </div>
-            </div>
-
-        </div>
-
-        <button type="button"
-                class="command-launcher" aria-label="Open Command Center"
-                id="command-launcher"
-                aria-expanded="false"
-                aria-controls="command-panel">
-
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8 8.6 8.6 0 0 1-3.5-.75L4 20l1.25-4.5A8 8 0 1 1 20 11.5z"/><path d="M8 11.5h8M8 14.5h5"/></svg>
-
-            <span class="launcher-label">Command Center</span>
-            <span class="launcher-dot"></span>
-        </button>
-
-    </aside>
-
-    <!-- ==================== JAVASCRIPT ==================== -->
-    <script>
-        /* ==================== COMMAND CENTER ==================== */
-
-        const launcher = document.getElementById("command-launcher");
-        const panel = document.getElementById("command-panel");
-        const backdrop = document.getElementById("command-backdrop");
-        const closeButton = document.getElementById("command-close");
-        const commandForm = document.getElementById("command-form");
-        const commandInput = document.getElementById("command-input");
-        const commandOutput = document.getElementById("command-output");
-
-        function setCommandCenterOpen(isOpen) {
-            panel.hidden = !isOpen;
-            backdrop.hidden = !isOpen;
-            launcher.setAttribute("aria-expanded", String(isOpen));
-
-            if (isOpen) {
-                commandInput.focus();
-            } else {
-                launcher.focus();
-            }
-        }
-
-        launcher.addEventListener("click", function () {
-            setCommandCenterOpen(panel.hidden);
+  <script>
+  (() => {
+    // CHAT: open/close, keyboard focus, and backend adapter.
+    const launcher = document.getElementById('chat-launcher');
+    const panel = document.getElementById('chat-panel');
+    const input = document.getElementById('chat-input');
+    const form = document.getElementById('chat-form');
+    const send = document.getElementById('chat-send');
+    const status = document.getElementById('chat-status');
+    const messages = document.getElementById('chat-messages');
+    const endpoint = form.dataset.endpoint.trim();
+    const history = [];
+    let pending = false;
+    
+    function setOpen(open) {
+      panel.hidden = !open;
+      launcher.setAttribute('aria-expanded', String(open));
+      (open ? input : launcher).focus();
+    }
+    
+    launcher.addEventListener('click', () => setOpen(panel.hidden));
+    document.getElementById('chat-close').addEventListener('click', () => setOpen(false));
+    panel.addEventListener('keydown', event => {
+      if (event.key === 'Escape') setOpen(false);
+    });
+    
+    function addMessage(role, content) {
+      const item = document.createElement('p');
+      item.className = `chat-message chat-message-${role}`;
+      item.textContent = content; 
+      messages.appendChild(item);
+      messages.scrollTop = messages.scrollHeight;
+    }
+    
+    addMessage('assistant', endpoint ? 'Hi! What would you like to know about Eddie?' : 'The chat panel is ready. AI replies are not connected yet.');
+    
+    if (!endpoint) {
+      status.textContent = 'AI connection pending.';
+      input.placeholder = 'AI connection pending';
+      input.readOnly = true;
+      send.disabled = true;
+    }
+    
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const message = input.value.trim();
+      if (!endpoint || !message || pending) return;
+      
+      pending = true;
+      send.disabled = true;
+      input.readOnly = true;
+      addMessage('user', message);
+      input.value = '';
+      status.textContent = 'Thinking…';
+      
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 30000);
+      
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message, history }), signal: controller.signal
         });
+        if (!response.ok) throw new Error('Chat request failed');
+        const data = await response.json();
+        if (typeof data.reply !== 'string' || !data.reply.trim()) throw new Error('Missing reply');
+        
+        addMessage('assistant', data.reply);
+        history.push({ role: 'user', content: message }, { role: 'assistant', content: data.reply });
+        status.textContent = '';
+      } catch (error) {
+        status.textContent = 'Could not get a reply. Your message is ready to retry.';
+        input.value = message;
+      } finally {
+        clearTimeout(timer);
+        pending = false;
+        send.disabled = false;
+        input.readOnly = false;
+        if (!panel.hidden) input.focus();
+      }
+    });
+  })();
+  </script>
 
-        closeButton.addEventListener("click", function () {
-            setCommandCenterOpen(false);
-        });
-
-        backdrop.addEventListener("click", function () {
-            setCommandCenterOpen(false);
-        });
-
-        document.addEventListener("keydown", function (event) {
-            if (event.key === "Escape" && !panel.hidden) {
-                setCommandCenterOpen(false);
-            }
-        });
-
-        function printLine(message, className = "") {
-            const line = document.createElement("p");
-            line.textContent = message;
-
-            if (className) {
-                line.className = className;
-            }
-
-            commandOutput.appendChild(line);
-            commandOutput.scrollTop = commandOutput.scrollHeight;
-        }
-
-        const routes = {
-            education: "/education",
-            experience: "/experience",
-            resume: "/resume"
-        };
-
-        function runCommand(rawCommand) {
-            const command = rawCommand.trim().toLowerCase();
-
-            if (!command) return;
-
-            printLine("visitor@portfolio:~$ " + command, "command-entered");
-
-            if (command === "clear") {
-                commandOutput.replaceChildren();
-                return;
-            }
-
-            if (command === "help") {
-                printLine("Available commands:");
-                printLine("about · education · experience · resume · contact · clear");
-                return;
-            }
-
-            if (command === "about") {
-                printLine("✓ Opening profile...", "command-success");
-                setCommandCenterOpen(false);
-
-                document.getElementById("top").scrollIntoView({
-                    behavior: "smooth"
-                });
-                return;
-            }
-
-            if (command === "contact") {
-                printLine("✓ Opening email...", "command-success");
-                window.location.href = "mailto:eddiejh03@gmail.com";
-                return;
-            }
-
-            if (routes[command]) {
-                printLine("✓ Opening " + command + "...", "command-success");
-                window.location.href = routes[command];
-                return;
-            }
-
-            printLine(
-                "Command not found: " + command + ". Type 'help' for available commands.",
-                "command-error"
-            );
-        }
-
-        commandForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-            runCommand(commandInput.value);
-            commandInput.value = "";
-        });
-
-        document.querySelectorAll(".command-quick-buttons [data-command]").forEach(function (button) {
-            button.addEventListener("click", function () {
-                runCommand(button.dataset.command);
-            });
-        });
-
-        document.getElementById("year").textContent = new Date().getFullYear();
-
-        /* ==================== INTERACTIVE BACKGROUND ==================== */
-
-        (function () {
-            const root = document.documentElement;
-
-            const motionPreference = window.matchMedia(
-                "(prefers-reduced-motion: reduce)"
-            );
-
-            let targetX = window.innerWidth * 0.5;
-            let targetY = window.innerHeight * 0.3;
-            let currentX = targetX;
-            let currentY = targetY;
-            let frame = 0;
-
-            function updateBackground() {
-                frame = 0;
-
-                if (motionPreference.matches) return;
-
-                currentX += (targetX - currentX) * 0.12;
-                currentY += (targetY - currentY) * 0.12;
-
-                root.style.setProperty("--bg-pointer-x", currentX + "px");
-                root.style.setProperty("--bg-pointer-y", currentY + "px");
-
-                if (
-                    Math.abs(targetX - currentX) > 0.5 ||
-                    Math.abs(targetY - currentY) > 0.5
-                ) {
-                    frame = window.requestAnimationFrame(updateBackground);
-                }
-            }
-
-            function requestBackgroundUpdate() {
-                if (!frame && !motionPreference.matches) {
-                    frame = window.requestAnimationFrame(updateBackground);
-                }
-            }
-
-            function updateParallax() {
-                if (motionPreference.matches) return;
-
-                const offset = Math.max(
-                    -90,
-                    -Math.min(window.scrollY * 0.08, 90)
-                );
-
-                root.style.setProperty("--bg-scroll", offset + "px");
-            }
-
-            function resetBackground() {
-                if (frame) {
-                    window.cancelAnimationFrame(frame);
-                }
-
-                frame = 0;
-
-                if (motionPreference.matches) {
-                    root.style.setProperty("--bg-pointer-x", "50%");
-                    root.style.setProperty("--bg-pointer-y", "30%");
-                    root.style.setProperty("--bg-scroll", "0px");
-                } else {
-                    updateParallax();
-                    requestBackgroundUpdate();
-                }
-            }
-
-            document.addEventListener("pointermove", function (event) {
-                if (motionPreference.matches) return;
-
-                targetX = event.clientX;
-                targetY = event.clientY;
-
-                requestBackgroundUpdate();
-            }, { passive: true });
-
-            window.addEventListener("scroll", updateParallax, {
-                passive: true
-            });
-
-            window.addEventListener("resize", function () {
-                targetX = window.innerWidth * 0.5;
-                targetY = window.innerHeight * 0.3;
-                requestBackgroundUpdate();
-            });
-
-            if (motionPreference.addEventListener) {
-                motionPreference.addEventListener("change", resetBackground);
-            }
-
-            resetBackground();
-        })();
-    </script>
-
+  <!-- MOTION CONTROL: pauses the constellation drift. -->
+  <script>
+    (() => {
+      const control = document.getElementById('sky-control');
+      const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+      let paused = reducedMotion.matches;
+      function updateMotion() {
+        document.body.classList.toggle('quiet-paused', paused);
+        control.setAttribute('aria-pressed', String(paused));
+        control.textContent = paused ? 'Resume motion' : 'Pause motion';
+        control.hidden = reducedMotion.matches;
+      }
+      control.addEventListener('click', () => { paused = !paused; updateMotion(); });
+      reducedMotion.addEventListener('change', () => { paused = reducedMotion.matches; updateMotion(); });
+      updateMotion();
+    })();
+  </script>
 </body>
 </html>
