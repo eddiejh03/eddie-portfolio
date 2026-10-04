@@ -6,6 +6,7 @@
   <title>Portfolio — Eddie Wong</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='minimal-orbit-2026') }}">
 
+  <!-- Description and layout overrides: keep these after the shared stylesheet. -->
   <style>
     /* 01 / PAGE FLOW */
     body.described-landing {
@@ -16,7 +17,7 @@
       overflow-y: auto;
       overflow-x: hidden;
       display: block;
-      margin: 0; /* Ensure no default margin gaps */
+      margin: 0;
     }
 
     /* 02 / TOP NAVIGATION PANEL */
@@ -47,7 +48,7 @@
     .described-landing .home-introduction {
       width: min(850px, calc(100% - 36px));
       margin: 0 auto;
-      padding: 46px 0 30px;
+      padding: 46px 0 10px;
       text-align: center;
     }
     .home-eyebrow {
@@ -69,7 +70,7 @@
       font: 14px/1.8 Arial, sans-serif;
     }
 
-    /* 04 / PORTRAIT AREA (Circles removed) */
+    /* 04 / BUBBLE AREA & PORTRAIT */
     .described-landing .orbit-stage {
       position: relative;
       display: block;
@@ -82,7 +83,7 @@
     .described-landing .orbit-scene {
       position: relative;
       width: min(1050px, 100%);
-      height: 350px;
+      height: 450px;
       min-height: 0;
       margin: 0 auto;
     }
@@ -90,7 +91,7 @@
       position: absolute;
       width: 230px;
       left: 50%;
-      top: 40%;
+      top: 44%;
       transform: translate(-50%, -50%);
     }
     .described-landing .portrait-circle { width: 230px; height: 230px; }
@@ -104,20 +105,44 @@
     }
     .home-portrait-caption p { margin: 0 0 6px; font: 29px/1.1 "Times New Roman", Times, serif; }
     .home-portrait-caption > span { color: #9aafbf; font: 9px/1.6 Consolas, monospace; letter-spacing: 2px; }
+    
+    /* BUBBLE VISIBILITY OVERRIDES */
+    .described-landing .orbit-bubble { 
+      background-color: #051626; /* Dark blue background to separate from sky */
+      border: 1px solid rgba(158, 220, 255, 0.5); /* Glowing border */
+      box-shadow: 0 0 15px rgba(158, 220, 255, 0.15); /* Drop shadow */
+      border-radius: 50%;
+      animation-duration: 10s; 
+    }
+    .described-landing .orbit-bubble:hover {
+      border-color: #9edcff;
+      box-shadow: 0 0 25px rgba(158, 220, 255, 0.35);
+    }
+    .described-landing .bubble-education { left: 11%; right: auto; top: 18px; bottom: auto; }
+    .described-landing .bubble-experience { right: 10%; left: auto; top: 28px; bottom: auto; }
+    .described-landing .bubble-resume { left: 17%; right: auto; top: auto; bottom: 18px; }
+    .described-landing .bubble-contact { right: 15%; left: auto; top: auto; bottom: 12px; }
 
-    /* 05 / MOBILE ADJUSTMENTS */
+    /* 05 / MOBILE */
     @media (max-width: 700px) {
       .described-landing .home-introduction { padding-top: 28px; }
       .home-eyebrow { font-size: 8px; letter-spacing: 1.4px; }
       .home-introduction h1 { font-size: clamp(33px, 7vw, 44px); }
       .home-description { font-size: 13px; }
       .desktop-break { display: none; }
-      .described-landing .orbit-scene { height: 350px; max-width: 480px; }
-      .described-landing .portrait-core { top: 40%; width: 154px; }
+      .described-landing .orbit-scene { height: 490px; max-width: 480px; }
+      .described-landing .portrait-core { top: 46%; width: 154px; }
       .described-landing .portrait-circle { width: 154px; height: 154px; }
       .home-portrait-caption { width: 190px; top: calc(100% + 12px); }
       .home-portrait-caption p { font-size: 25px; }
       .home-portrait-caption > span { font-size: 8px; letter-spacing: 1px; }
+      .described-landing .orbit-bubble { width: 112px; height: 112px; }
+      .described-landing .bubble-title { font-size: 20px; }
+      .described-landing .bubble-detail { font-size: 8px; }
+      .described-landing .bubble-education { left: 3%; top: 20px; }
+      .described-landing .bubble-experience { right: 3%; top: 25px; }
+      .described-landing .bubble-resume { left: 2%; bottom: 7px; }
+      .described-landing .bubble-contact { right: 2%; bottom: 2px; }
       .top-panel { gap: 15px; flex-wrap: wrap; }
       .top-panel a { font-size: 11px; }
     }
@@ -145,23 +170,7 @@
     .sky-drift-slow { animation: quiet-drift 47s ease-in-out -15s infinite alternate-reverse; }
     .sky-symbols { fill: none; stroke: #9edcff; stroke-width: 1.1; opacity: .23; }
     .sky-symbols text { fill: #9edcff; stroke: none; font-family: Consolas, monospace; }
-    .sky-control {
-      position: fixed;
-      bottom: 22px;
-      left: 22px;
-      z-index: 20;
-      padding: 8px 12px;
-      border: 1px solid #9edcff35;
-      border-radius: 20px;
-      color: #a7bfd0;
-      background: #07111be6;
-      font: 10px/1.5 Consolas, monospace;
-      cursor: pointer;
-    }
-    .sky-control:hover { color: #e2f4ff; border-color: #9edcff80; }
-    .sky-control:focus-visible { outline: 2px solid #9edcff; outline-offset: 4px; }
-    .quiet-paused .sky-drift,
-    .quiet-paused .sky-drift-slow { animation-play-state: paused !important; }
+    
     @keyframes quiet-drift {
       from { transform: translate(0, 0); }
       to { transform: translate(8px, -10px); }
@@ -169,10 +178,10 @@
     @media (max-width: 700px) {
       .sky-symbols { opacity: .15; }
       .sky-constellations { opacity: .18; }
-      .sky-control { left: 12px; bottom: 18px; font-size: 9px; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .sky-drift, .sky-drift-slow { animation: none !important; }
+      .sky-drift, .sky-drift-slow,
+      .described-landing .orbit-bubble { animation: none !important; }
     }
   </style>
 </head>
@@ -196,18 +205,149 @@
           <circle cx="237" cy="39" r="1.3" opacity="0.19" />
           <circle cx="528" cy="525" r="1.3" opacity="0.16" />
           <circle cx="293" cy="576" r="0.8" opacity="0.14" />
+          <circle cx="321" cy="734" r="0.8" opacity="0.28" />
+          <circle cx="689" cy="564" r="0.6" opacity="0.07" />
+          <circle cx="645" cy="431" r="1.3" opacity="0.07" />
+          <circle cx="1323" cy="626" r="1.3" opacity="0.16" />
+          <circle cx="1048" cy="356" r="1" opacity="0.06" />
+          <circle cx="1182" cy="64" r="1" opacity="0.39" />
+          <circle cx="115" cy="500" r="0.6" opacity="0.23" />
+          <circle cx="842" cy="256" r="0.8" opacity="0.07" />
+          <circle cx="521" cy="551" r="0.6" opacity="0.18" />
+          <circle cx="559" cy="77" r="0.8" opacity="0.16" />
+          <circle cx="1248" cy="860" r="0.8" opacity="0.29" />
+          <circle cx="524" cy="686" r="1" opacity="0.10" />
+          <circle cx="665" cy="186" r="1" opacity="0.10" />
+          <circle cx="698" cy="21" r="1" opacity="0.06" />
+          <circle cx="51" cy="490" r="1.3" opacity="0.34" />
+          <circle cx="1308" cy="67" r="1" opacity="0.34" />
+          <circle cx="540" cy="88" r="1.3" opacity="0.16" />
+          <circle cx="54" cy="647" r="0.8" opacity="0.29" />
+          <circle cx="837" cy="508" r="1.3" opacity="0.15" />
+          <circle cx="387" cy="212" r="0.8" opacity="0.42" />
+          <circle cx="1397" cy="125" r="0.6" opacity="0.39" />
+          <circle cx="1111" cy="324" r="1" opacity="0.36" />
+          <circle cx="659" cy="62" r="1.3" opacity="0.08" />
+          <circle cx="202" cy="719" r="1" opacity="0.35" />
+          <circle cx="1358" cy="425" r="0.6" opacity="0.26" />
+          <circle cx="1124" cy="663" r="0.8" opacity="0.41" />
+          <circle cx="1102" cy="283" r="1" opacity="0.29" />
+          <circle cx="112" cy="754" r="1.3" opacity="0.39" />
+          <circle cx="1008" cy="239" r="1.3" opacity="0.13" />
+          <circle cx="170" cy="482" r="0.8" opacity="0.35" />
+          <circle cx="1001" cy="337" r="1" opacity="0.16" />
+          <circle cx="1237" cy="41" r="1.3" opacity="0.41" />
+          <circle cx="121" cy="864" r="0.8" opacity="0.22" />
+          <circle cx="1150" cy="248" r="1" opacity="0.30" />
+          <circle cx="364" cy="784" r="1.3" opacity="0.18" />
+          <circle cx="740" cy="471" r="0.6" opacity="0.13" />
+          <circle cx="1083" cy="22" r="0.8" opacity="0.18" />
+          <circle cx="932" cy="486" r="0.8" opacity="0.11" />
+          <circle cx="1110" cy="574" r="0.6" opacity="0.26" />
+          <circle cx="614" cy="281" r="0.6" opacity="0.08" />
+          <circle cx="969" cy="357" r="0.8" opacity="0.16" />
+          <circle cx="118" cy="285" r="0.6" opacity="0.15" />
+          <circle cx="68" cy="127" r="1" opacity="0.26" />
+          <circle cx="1265" cy="220" r="0.6" opacity="0.42" />
+          <circle cx="65" cy="478" r="0.8" opacity="0.28" />
+          <circle cx="1341" cy="42" r="0.6" opacity="0.38" />
+          <circle cx="888" cy="71" r="0.6" opacity="0.15" />
+          <circle cx="397" cy="563" r="1" opacity="0.09" />
+          <circle cx="723" cy="568" r="1.3" opacity="0.13" />
+          <circle cx="842" cy="19" r="1" opacity="0.12" />
+          <circle cx="177" cy="787" r="0.6" opacity="0.34" />
+          <circle cx="1294" cy="760" r="1" opacity="0.38" />
+          <circle cx="670" cy="132" r="0.8" opacity="0.10" />
+          <circle cx="1024" cy="853" r="0.6" opacity="0.09" />
+          <circle cx="534" cy="267" r="1.3" opacity="0.06" />
+          <circle cx="647" cy="713" r="1" opacity="0.08" />
+          <circle cx="274" cy="230" r="0.8" opacity="0.27" />
+          <circle cx="613" cy="97" r="1.3" opacity="0.11" />
+          <circle cx="1083" cy="630" r="0.8" opacity="0.35" />
+          <circle cx="1370" cy="584" r="1" opacity="0.16" />
+          <circle cx="1022" cy="834" r="1" opacity="0.17" />
+          <circle cx="845" cy="79" r="0.8" opacity="0.14" />
+          <circle cx="321" cy="808" r="1" opacity="0.19" />
+          <circle cx="1118" cy="788" r="0.8" opacity="0.25" />
+          <circle cx="603" cy="260" r="0.8" opacity="0.12" />
+          <circle cx="774" cy="19" r="1" opacity="0.14" />
+          <circle cx="1021" cy="90" r="1.3" opacity="0.11" />
+          <circle cx="511" cy="186" r="1" opacity="0.06" />
+          <circle cx="161" cy="307" r="1.3" opacity="0.22" />
+          <circle cx="670" cy="164" r="1" opacity="0.18" />
+          <circle cx="643" cy="404" r="0.8" opacity="0.17" />
+          <circle cx="905" cy="118" r="1" opacity="0.18" />
+          <circle cx="497" cy="233" r="1" opacity="0.08" />
+          <circle cx="905" cy="396" r="0.6" opacity="0.09" />
+          <circle cx="642" cy="426" r="0.8" opacity="0.19" />
+          <circle cx="658" cy="24" r="0.6" opacity="0.06" />
+          <circle cx="732" cy="703" r="1.3" opacity="0.14" />
+          <circle cx="878" cy="636" r="1" opacity="0.09" />
+          <circle cx="932" cy="802" r="1.3" opacity="0.18" />
+          <circle cx="448" cy="205" r="1" opacity="0.08" />
+          <circle cx="413" cy="247" r="1.3" opacity="0.16" />
+          <circle cx="158" cy="478" r="1" opacity="0.32" />
+          <circle cx="1037" cy="812" r="1.3" opacity="0.07" />
+          <circle cx="916" cy="845" r="0.8" opacity="0.14" />
+          <circle cx="494" cy="458" r="0.8" opacity="0.16" />
+          <circle cx="1415" cy="423" r="1" opacity="0.23" />
+          <circle cx="501" cy="346" r="0.8" opacity="0.18" />
+          <circle cx="367" cy="516" r="0.6" opacity="0.12" />
+          <circle cx="844" cy="678" r="0.8" opacity="0.12" />
+          <circle cx="1029" cy="43" r="0.8" opacity="0.09" />
+          <circle cx="419" cy="172" r="0.6" opacity="0.09" />
+          <circle cx="266" cy="310" r="0.6" opacity="0.25" />
+          <circle cx="618" cy="880" r="1" opacity="0.14" />
+          <circle cx="1100" cy="330" r="1" opacity="0.31" />
+          <circle cx="1165" cy="46" r="0.6" opacity="0.35" />
       </g>
       <g class="sky-drift">
         <g class="sky-constellations">
           <path d="M46 100 L120 157 L196 119 L254 213 L192 287 L85 255 L120 157 M192 287 L226 358" />
+          <path d="M1115 98 L1193 64 L1260 136 L1351 112 L1392 213 L1304 272 L1260 136 M1304 272 L1196 246" />
+          <path d="M62 574 L147 541 L228 613 L191 692 L269 755 M147 541 L102 681 L191 692" />
         </g>
         <g class="sky-nodes">
           <circle cx="46" cy="100" r="2"/><circle cx="120" cy="157" r="2.5"/>
+          <circle cx="196" cy="119" r="2"/><circle cx="254" cy="213" r="2"/>
+          <circle cx="192" cy="287" r="2.5"/><circle cx="85" cy="255" r="1.8"/>
+          <circle cx="226" cy="358" r="2"/><circle cx="1193" cy="64" r="2"/>
+          <circle cx="1260" cy="136" r="2.5"/><circle cx="1351" cy="112" r="2"/>
+          <circle cx="1392" cy="213" r="2"/><circle cx="1304" cy="272" r="2.5"/>
+          <circle cx="147" cy="541" r="2.5"/><circle cx="228" cy="613" r="2"/>
+          <circle cx="191" cy="692" r="2"/><circle cx="269" cy="755" r="2"/>
+        </g>
+        <!-- Piano keyboard: seven white keys and five dark-key outlines. -->
+        <g class="sky-symbols" transform="translate(72 405) rotate(-12)">
+          <rect width="112" height="54" rx="4" />
+          <path d="M16 0 V54 M32 0 V54 M48 0 V54 M64 0 V54 M80 0 V54 M96 0 V54" />
+          <path fill="#07111b" d="M12 0 H20 V32 H12 Z M28 0 H36 V32 H28 Z M60 0 H68 V32 H60 Z M76 0 H84 V32 H76 Z M92 0 H100 V32 H92 Z" />
+        </g>
+      </g>
+      <g class="sky-drift-slow">
+        <g class="sky-constellations">
+          <path d="M1167 482 L1250 537 L1340 491 L1390 596 L1303 663 L1250 537 M1303 663 L1172 733 L1237 813" />
+          <path d="M352 805 L430 760 L493 831 M965 807 L1040 851 L1102 793" />
+        </g>
+        <g class="sky-nodes">
+          <circle cx="1167" cy="482" r="2"/><circle cx="1250" cy="537" r="2.5"/>
+          <circle cx="1340" cy="491" r="2"/><circle cx="1390" cy="596" r="2"/>
+          <circle cx="1303" cy="663" r="2.5"/><circle cx="1172" cy="733" r="2"/>
+          <circle cx="1237" cy="813" r="2"/><circle cx="430" cy="760" r="2"/>
+          <circle cx="1040" cy="851" r="2"/>
+        </g>
+        <!-- Code and music details -->
+        <g class="sky-symbols">
+          <text x="1230" y="370" font-size="31" transform="rotate(8 1230 370)">&lt;/&gt;</text>
+          <text x="295" y="720" font-size="24">{ }</text>
+          <text x="1110" y="850" font-size="18">Go · Python</text>
+          <path d="M1365 745 V698 L1397 691 V738 M1365 708 L1397 701" />
+          <ellipse cx="1358" cy="746" rx="7" ry="5"/>
+          <ellipse cx="1390" cy="739" rx="7" ry="5"/>
         </g>
       </g>
     </svg>
   </div>
-  <button class="sky-control" id="sky-control" type="button" aria-pressed="false" hidden>Pause motion</button>
 
   <!-- HOME: introduction and circular portrait -->
   <header class="home-introduction">
@@ -227,6 +367,12 @@
         <div class="home-portrait-caption"><p>Eddie <em>Wong</em></p><span>LEARN · BUILD · CONNECT</span></div>
       </div>
 
+      <!-- Restored Orbit Bubbles -->
+      <a class="orbit-bubble bubble-education" href="/education"><span class="bubble-inner"><span class="bubble-icon" aria-hidden="true">01 ↗</span><span class="bubble-title">Education</span><span class="bubble-detail">My foundations</span></span></a>
+      <a class="orbit-bubble bubble-experience" href="/experience"><span class="bubble-inner"><span class="bubble-icon" aria-hidden="true">02 ↗</span><span class="bubble-title">Experience</span><span class="bubble-detail">Learning by doing</span></span></a>
+      <a class="orbit-bubble bubble-resume" href="/resume"><span class="bubble-inner"><span class="bubble-icon" aria-hidden="true">03 ↗</span><span class="bubble-title">Résumé</span><span class="bubble-detail">Get to know me</span></span></a>
+      <a class="orbit-bubble bubble-contact" href="mailto:eddiejh03@gmail.com"><span class="bubble-inner"><span class="bubble-icon" aria-hidden="true">04 ↗</span><span class="bubble-title">Let’s talk</span><span class="bubble-detail">Start a conversation</span></span></a>
+
     </div>
   </main>
   
@@ -240,7 +386,7 @@
     <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
     <p class="chat-status" id="chat-status" role="status"></p>
     
-    <!-- HARDCODED ENDPOINT: Changed data-endpoint to /chat to unlock the UI -->
+    <!-- HARDCODED ENDPOINT -->
     <form class="chat-form" id="chat-form" data-endpoint="/chat">
       <input id="chat-input" aria-label="Your message" placeholder="Ask about Eddie…" maxlength="2000" autocomplete="off" required>
       <button id="chat-send" type="submit">Send</button>
@@ -249,6 +395,23 @@
 
   <script>
   (() => {
+    // BUBBLES: mouse attraction, with reduced-motion support.
+    const preference = matchMedia('(prefers-reduced-motion: reduce)');
+    document.querySelectorAll('.orbit-bubble').forEach(bubble => {
+      const reset = () => {
+        bubble.style.setProperty('--mx', '0px');
+        bubble.style.setProperty('--my', '0px');
+      };
+      bubble.addEventListener('pointermove', event => {
+        if (preference.matches || event.pointerType !== 'mouse') return;
+        const rect = bubble.getBoundingClientRect();
+        bubble.style.setProperty('--mx', `${(event.clientX - rect.left - rect.width / 2) * .12}px`);
+        bubble.style.setProperty('--my', `${(event.clientY - rect.top - rect.height / 2) * .12}px`);
+      });
+      bubble.addEventListener('pointerleave', reset);
+      preference.addEventListener('change', reset);
+    });
+
     // CHAT: open/close, keyboard focus, and backend adapter.
     const launcher = document.getElementById('chat-launcher');
     const panel = document.getElementById('chat-panel');
@@ -329,24 +492,6 @@
       }
     });
   })();
-  </script>
-
-  <!-- MOTION CONTROL: pauses the constellation drift. -->
-  <script>
-    (() => {
-      const control = document.getElementById('sky-control');
-      const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-      let paused = reducedMotion.matches;
-      function updateMotion() {
-        document.body.classList.toggle('quiet-paused', paused);
-        control.setAttribute('aria-pressed', String(paused));
-        control.textContent = paused ? 'Resume motion' : 'Pause motion';
-        control.hidden = reducedMotion.matches;
-      }
-      control.addEventListener('click', () => { paused = !paused; updateMotion(); });
-      reducedMotion.addEventListener('change', () => { paused = reducedMotion.matches; updateMotion(); });
-      updateMotion();
-    })();
   </script>
 </body>
 </html>
