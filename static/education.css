@@ -1,12 +1,960 @@
-/* Education page — black, ice blue, and classic serif typography. */
-.education-theme{--bg:#030507;--bg-secondary:#080e14;--surface:#0b141c;--border:#253641;--text:#edf4f9;--muted:#a4b4c1;--accent:#9edcff;--accent-bright:#c7edff;--accent-soft:#112838;--font-heading:"Times New Roman",Times,serif;--font-mono:Consolas,monospace;background:var(--bg);color:var(--text)}
-.education-theme *{box-sizing:border-box}.education-theme [hidden]{display:none!important}.education-theme .site-header{background:rgba(3,5,7,.94);border-color:#1e2b35}.education-theme .nav-links a:hover{color:#e9f6ff}.education-theme .accent,.education-theme em{color:var(--accent)}.education-theme h1,.education-theme h2,.education-theme h3{font-family:var(--font-heading);font-weight:400}.education-theme a:focus-visible,.education-theme button:focus-visible{outline:2px solid var(--accent);outline-offset:5px}.education-theme .eyebrow{font:10px/1.6 var(--font-mono);letter-spacing:1.6px;color:var(--accent);margin:0}.education-theme .button{background:#0c1822;color:#ddf2ff;border-color:#304c60;padding:14px 20px;border-radius:5px}.education-theme .button-primary{background:var(--accent);color:#06111a;border-color:var(--accent)}
-.education-intro{display:grid;grid-template-columns:1.4fr 1fr;align-items:end;gap:70px;padding:70px 0 55px;border-bottom:1px solid var(--border)}.education-intro h1{font-size:clamp(48px,5.8vw,78px);line-height:1.02;letter-spacing:-.045em;margin:22px 0 0}.education-intro h1 em{font-weight:400}.intro-aside{padding:0 0 4px;max-width:370px;justify-self:end}.intro-aside p{font-size:15px;line-height:1.85;color:var(--muted);margin:0 0 24px}.text-link{font:12px var(--font-mono);color:var(--accent)}.text-link span{margin-left:12px}.text-link:hover{text-decoration:underline;text-underline-offset:6px}
-.academic-section{padding-top:42px}.education-theme .section-heading{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:24px}.education-theme h2{font-size:clamp(30px,3.2vw,43px);margin:0;line-height:1.12}.section-kicker{font:9px/1.6 var(--font-mono);letter-spacing:1.4px;color:var(--muted);padding-bottom:5px}.degree-feature{display:grid;grid-template-columns:1fr 280px;border:1px solid #35546a;border-radius:10px;overflow:hidden;background:radial-gradient(ellipse at 10% 10%,#12263970,transparent 65%),#080e14}.degree-story{padding:32px 36px}.degree-topline,.study-top{display:flex;justify-content:space-between;align-items:center;gap:16px}.status{font:10px/1.6 var(--font-mono);color:#c5d9e6}.status span{display:inline-block;width:5px;height:5px;background:var(--accent);border-radius:50%;margin-right:6px;box-shadow:0 0 9px #9edcff70}.degree-story h3{font-size:44px;margin:28px 0 12px;letter-spacing:-.03em}.programme{font-size:14px;color:#cad7e2;margin-bottom:24px}.scholarship{font-size:13px;color:var(--accent);margin:0 0 3px}.scholarship span{margin-right:7px}.scholarship-note{font-size:12px;color:var(--muted);margin:0}.degree-bottom{display:flex;align-items:center;gap:18px;margin-top:32px;padding-top:20px;border-top:1px solid #253641}.degree-bottom span{font:9px var(--font-mono);letter-spacing:1px;color:var(--muted)}.degree-bottom strong{font:14px var(--font-heading);color:var(--text)}.degree-score{display:flex;flex-direction:column;align-items:center;justify-content:center;border-left:1px solid #35546a;background:radial-gradient(ellipse at 50% 55%,#193a5255,transparent 70%),#0a151e;padding:30px}.score{font:100px/1.18 var(--font-heading);letter-spacing:-7px;color:var(--accent);margin-top:10px;padding-right:6px}.score-scale{font:13px var(--font-mono);color:#b0c7d7}.score-caption{font:10px var(--font-mono);letter-spacing:1px;color:var(--muted);margin-top:36px}
-.earlier-studies{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}.study-card{padding:28px 32px;border:1px solid var(--border);border-radius:10px;background:#080d12}.study-year{font:11px var(--font-mono);color:var(--muted)}.study-card h3{font-size:34px;line-height:1.06;margin:24px 0 14px}.study-card .programme{font-size:13px;margin-bottom:24px}.study-bottom{display:flex;align-items:end;justify-content:space-between;gap:16px;padding-top:20px;border-top:1px solid var(--border)}.stat-label{display:block;font:9px var(--font-mono);color:var(--muted);letter-spacing:1.2px;margin-bottom:9px}.study-bottom strong{font:37px/1 var(--font-heading);color:var(--accent)}.study-bottom strong small{font:13px var(--font-mono);color:var(--muted)}.completion{font:10px var(--font-mono);color:var(--muted);padding-bottom:5px}.result-note{font-size:11px;color:var(--muted);margin:17px 0 0}
-.credentials-section{padding:72px 0 0;scroll-margin-top:110px}.credentials-section .eyebrow{margin-bottom:12px}.section-description{font-size:12px;line-height:1.7;color:var(--muted);margin:0}.filter-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--border);padding:4px 0 18px;margin-top:28px}.cert-filters{display:flex;gap:8px;flex-wrap:wrap}.cert-filters button{background:transparent;border:1px solid transparent;color:var(--muted);font:11px Arial,sans-serif;padding:9px 15px;border-radius:20px;cursor:pointer}.cert-filters button[aria-pressed=true]{background:#112837;color:var(--accent);border-color:#385a70}.cert-filters button:hover{color:#fff;border-color:#385a70}#filter-count{font:10px var(--font-mono);color:var(--muted);white-space:nowrap;margin:0}.cert-grid{display:grid;grid-template-columns:1fr}.cert-card{position:relative;display:grid;grid-template-columns:42px minmax(0,1fr) auto;column-gap:24px;row-gap:7px;padding:26px 16px 26px 6px;border-bottom:1px solid var(--border);transition:background .2s}.cert-card:hover{background:#0b141c}.cert-icon{grid-column:1;grid-row:1/4;align-self:center;width:40px;height:40px;display:grid;place-items:center;border-radius:50%;border:1px solid #355165;color:var(--accent);background:#10202c}.cert-icon svg{width:21px;height:21px}.cert-type{grid-column:2;grid-row:1;color:var(--accent);font:9px var(--font-mono);letter-spacing:1.3px}.cert-card>strong{grid-column:2;grid-row:2;font:23px/1.2 var(--font-heading);color:var(--text);font-weight:400}.cert-meta{grid-column:2;grid-row:3;font:11px/1.6 Arial,sans-serif;color:var(--muted)}.cert-actions{grid-column:3;grid-row:1/4;align-self:center}.cert-view{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:11px 14px;color:var(--accent);background:#0d1b26;border:1px solid #345266;border-radius:5px;font:11px/1.5 var(--font-mono);cursor:pointer;white-space:nowrap;transition:background .2s,border-color .2s}.cert-view:hover{background:#19364a;border-color:var(--accent)}.cert-actions>.cert-meta{display:block;max-width:130px;font-size:10px}
-.edu-next{display:flex;justify-content:space-between;align-items:center;gap:24px;margin:66px 0 54px;padding:32px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.edu-next .eyebrow{margin-bottom:12px}.edu-next h2{font-size:36px}.education-theme .footer{font-size:11px;border-color:var(--border)}
-.viewer-open{overflow:hidden}.certificate-modal{width:min(1080px,94vw);height:88vh;max-height:900px;padding:0;border:1px solid #496b80;border-radius:10px;background:#080e14;color:var(--text);overflow:hidden;box-shadow:0 30px 100px #0009}.certificate-modal::backdrop{background:#000c;backdrop-filter:blur(6px)}.certificate-window{display:flex;flex-direction:column;height:100%}.certificate-header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 20px;border-bottom:1px solid var(--border)}.certificate-heading{min-width:0}.certificate-heading h3{font-size:19px;line-height:1.25;margin:5px 0 0;overflow-wrap:anywhere}.certificate-header-actions{display:flex;gap:10px;align-items:center;flex-shrink:0}.certificate-header-actions a,.certificate-header-actions button{border:1px solid #345266;border-radius:5px;background:#10202c;color:var(--accent);font:12px var(--font-mono);padding:10px}.certificate-header-actions button{font-size:22px;line-height:16px;cursor:pointer}.document-stage{flex:1;min-height:0;overflow:auto;display:flex;justify-content:center;background:#111a21}.document-stage iframe{width:100%;height:100%;border:0;background:white}.document-stage img{display:block;max-width:100%;height:100%;object-fit:contain}.viewer-help{margin:0;padding:10px 18px;color:var(--muted);font-size:11px;border-top:1px solid var(--border)}
-@media(max-width:850px){.education-intro{gap:35px}.degree-feature{grid-template-columns:1fr 220px}.degree-story{padding:28px}.degree-topline{align-items:flex-start;flex-direction:column;gap:8px}.score{font-size:85px}.section-kicker{display:none}.cert-card{column-gap:16px}.cert-card>strong{font-size:21px}}
-@media(max-width:600px){.education-intro{grid-template-columns:1fr;padding:38px 0;gap:24px}.education-intro h1{font-size:49px}.intro-aside{justify-self:start;max-width:none}.intro-aside p{font-size:14px;margin-bottom:16px}.education-theme .nav-links{gap:16px;font-size:12px}.degree-feature{grid-template-columns:1fr}.degree-story{padding:24px}.degree-story h3{font-size:36px}.degree-score{border-left:0;border-top:1px solid #35546a;display:grid;grid-template-columns:1fr auto;gap:4px 15px;padding:22px 24px;justify-items:start}.degree-score .eyebrow{grid-column:1;grid-row:1;align-self:end}.score{grid-column:2;grid-row:1/3;font-size:67px;letter-spacing:-4px;margin:0;line-height:1}.score-scale{grid-column:1;grid-row:2;font-size:11px}.score-caption{display:none}.earlier-studies{grid-template-columns:1fr}.study-card{padding:24px}.education-theme .section-heading{align-items:start;flex-direction:column;gap:14px}.education-theme h2{font-size:33px}.credentials-section{padding-top:48px}.filter-bar{flex-wrap:wrap;margin-top:20px;gap:14px}.cert-filters{gap:3px}.cert-filters button{padding:8px 10px;font-size:10px}.cert-card{grid-template-columns:34px minmax(0,1fr);gap:7px 15px;padding:24px 4px}.cert-icon{width:34px;height:34px;align-self:start}.cert-card>strong{font-size:23px}.cert-actions{grid-column:2;grid-row:4;margin-top:9px}.cert-actions>.cert-meta{max-width:none}.edu-next{align-items:start;flex-direction:column;margin:44px 0 32px;gap:22px}.edu-next h2{font-size:32px}.certificate-header{padding:12px;gap:10px}.certificate-header .eyebrow{font-size:8px}.certificate-heading h3{font-size:15px}.certificate-header-actions{gap:5px}.certificate-header-actions a{font-size:10px;padding:10px 7px}.certificate-modal{width:96vw;height:90vh}.education-theme .site-header{position:relative}.credentials-section{scroll-margin-top:20px}}
-@media(prefers-reduced-motion:reduce){.education-theme *{scroll-behavior:auto!important;transition:none!important}}
+/* ==========================================================
+   EDUCATION PAGE
+
+   1. Page foundations
+   2. Introduction
+   3. Academic section headings
+   4. University degree card
+   5. Earlier qualifications
+   6. Certificate section and sidebar
+   7. Certificate cards
+   8. Next-page link and footer
+   9. Certificate preview dialog
+   10. Tablet layouts
+   11. Mobile layouts
+   12. Reduced motion
+   ========================================================== */
+
+
+/* ==========================================================
+   1. PAGE FOUNDATIONS
+   Shared colours and fonts are defined in shared.css.
+   ========================================================== */
+
+.education-theme {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.education-theme * {
+  box-sizing: border-box;
+}
+
+.education-theme [hidden] {
+  display: none !important;
+}
+
+.education-theme .accent,
+.education-theme em {
+  color: var(--accent);
+}
+
+.education-theme h1,
+.education-theme h2,
+.education-theme h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+}
+
+.education-theme a:focus-visible,
+.education-theme button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+
+.education-theme .eyebrow {
+  margin: 0;
+  color: var(--accent);
+  font: 10px/1.6 var(--font-mono);
+  letter-spacing: 1.6px;
+}
+
+.education-theme .button {
+  padding: 14px 20px;
+  border-color: #304c60;
+  border-radius: 5px;
+  background: #0c1822;
+  color: #ddf2ff;
+}
+
+.education-theme .button-primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #06111a;
+}
+
+
+/* ==========================================================
+   2. INTRODUCTION
+   ========================================================== */
+
+.education-intro {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  align-items: end;
+  gap: 70px;
+  padding: 70px 0 55px;
+  border-bottom: 1px solid var(--border);
+}
+
+.education-intro h1 {
+  margin: 22px 0 0;
+  font-size: clamp(48px, 5.8vw, 78px);
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+
+.education-intro h1 em {
+  font-weight: 400;
+}
+
+.intro-aside {
+  justify-self: end;
+  max-width: 370px;
+  padding-bottom: 4px;
+}
+
+.intro-aside p {
+  margin: 0 0 24px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+.text-link {
+  color: var(--accent);
+  font: 12px var(--font-mono);
+}
+
+.text-link span {
+  margin-left: 12px;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+
+/* ==========================================================
+   3. ACADEMIC SECTION HEADINGS
+   ========================================================== */
+
+.academic-section {
+  padding-top: 42px;
+}
+
+.education-theme .section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.education-theme h2 {
+  margin: 0;
+  font-size: clamp(30px, 3.2vw, 43px);
+  line-height: 1.12;
+}
+
+.section-kicker {
+  padding-bottom: 5px;
+  color: var(--muted);
+  font: 9px/1.6 var(--font-mono);
+  letter-spacing: 1.4px;
+}
+
+
+/* ==========================================================
+   4. UNIVERSITY DEGREE CARD
+   ========================================================== */
+
+.degree-feature {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  overflow: hidden;
+  border: 1px solid #35546a;
+  border-radius: 10px;
+  background:
+    radial-gradient(
+      ellipse at 10% 10%,
+      #12263970,
+      transparent 65%
+    ),
+    #080e14;
+}
+
+.degree-story {
+  padding: 32px 36px;
+}
+
+.degree-topline,
+.study-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.status {
+  color: #c5d9e6;
+  font: 10px/1.6 var(--font-mono);
+}
+
+.status span {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 9px #9edcff70;
+}
+
+.degree-story h3 {
+  margin: 28px 0 12px;
+  font-size: 44px;
+  letter-spacing: -0.03em;
+}
+
+.programme {
+  margin-bottom: 24px;
+  color: #cad7e2;
+  font-size: 14px;
+}
+
+.scholarship {
+  margin: 0 0 3px;
+  color: var(--accent);
+  font-size: 13px;
+}
+
+.scholarship span {
+  margin-right: 7px;
+}
+
+.scholarship-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.degree-bottom {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.degree-bottom span {
+  color: var(--muted);
+  font: 9px var(--font-mono);
+  letter-spacing: 1px;
+}
+
+.degree-bottom strong {
+  color: var(--text);
+  font: 14px var(--font-heading);
+}
+
+
+/* 4A. CGPA panel */
+
+.degree-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  border-left: 1px solid #35546a;
+  background:
+    radial-gradient(
+      ellipse at 50% 55%,
+      #193a5255,
+      transparent 70%
+    ),
+    #0a151e;
+}
+
+.score {
+  margin-top: 10px;
+  padding-right: 6px;
+  color: var(--accent);
+  font: 100px/1.18 var(--font-heading);
+  letter-spacing: -7px;
+}
+
+.score-scale {
+  color: #b0c7d7;
+  font: 13px var(--font-mono);
+}
+
+.score-caption {
+  margin-top: 36px;
+  color: var(--muted);
+  font: 10px var(--font-mono);
+  letter-spacing: 1px;
+}
+
+
+/* ==========================================================
+   5. EARLIER QUALIFICATIONS
+   Foundation and SPM cards.
+   ========================================================== */
+
+.earlier-studies {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.study-card {
+  padding: 28px 32px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #080d12;
+}
+
+.study-year {
+  color: var(--muted);
+  font: 11px var(--font-mono);
+}
+
+.study-card h3 {
+  margin: 24px 0 14px;
+  font-size: 34px;
+  line-height: 1.06;
+}
+
+.study-card .programme {
+  margin-bottom: 24px;
+  font-size: 13px;
+}
+
+.study-bottom {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.stat-label {
+  display: block;
+  margin-bottom: 9px;
+  color: var(--muted);
+  font: 9px var(--font-mono);
+  letter-spacing: 1.2px;
+}
+
+.study-bottom strong {
+  color: var(--accent);
+  font: 37px/1 var(--font-heading);
+}
+
+.study-bottom strong small {
+  color: var(--muted);
+  font: 13px var(--font-mono);
+}
+
+.completion {
+  padding-bottom: 5px;
+  color: var(--muted);
+  font: 10px var(--font-mono);
+}
+
+.result-note {
+  margin: 17px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+
+/* ==========================================================
+   6. CERTIFICATE SECTION AND SIDEBAR
+   ========================================================== */
+
+.credentials-section {
+  padding-top: 72px;
+  scroll-margin-top: 110px;
+}
+
+.credentials-section .eyebrow {
+  margin-bottom: 12px;
+}
+
+.section-description {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.credentials-layout {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  align-items: start;
+  gap: 32px;
+  margin-top: 28px;
+}
+
+.certificate-sidebar {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-secondary);
+}
+
+.sidebar-label {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font: 11px/1.6 var(--font-mono);
+}
+
+.certificate-sidebar .cert-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.certificate-sidebar .cert-filters button {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  font: 12px/1.5 Arial, sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+
+.certificate-sidebar .cert-filters button[aria-pressed="true"] {
+  border-color: #385a70;
+  background: #112837;
+  color: var(--accent);
+}
+
+.certificate-sidebar .cert-filters button:hover {
+  border-color: #385a70;
+  color: #ffffff;
+}
+
+.certificate-results {
+  min-width: 0;
+}
+
+#filter-count {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font: 10px/1.6 var(--font-mono);
+}
+
+
+/* ==========================================================
+   7. CERTIFICATE CARDS
+   ========================================================== */
+
+.cert-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.cert-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  column-gap: 24px;
+  row-gap: 7px;
+  padding: 26px 16px 26px 6px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+.cert-card:hover {
+  background: var(--surface);
+}
+
+.cert-icon {
+  grid-column: 1;
+  grid-row: 1 / 4;
+  align-self: center;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #355165;
+  border-radius: 50%;
+  background: #10202c;
+  color: var(--accent);
+}
+
+.cert-icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.cert-type {
+  grid-column: 2;
+  grid-row: 1;
+  color: var(--accent);
+  font: 9px/1.6 var(--font-mono);
+  letter-spacing: 1.3px;
+}
+
+.cert-card > strong {
+  grid-column: 2;
+  grid-row: 2;
+  color: var(--text);
+  font: 400 23px/1.2 var(--font-heading);
+  overflow-wrap: anywhere;
+}
+
+.cert-meta {
+  grid-column: 2;
+  grid-row: 3;
+  color: var(--muted);
+  font: 11px/1.6 Arial, sans-serif;
+}
+
+
+/* 7A. Preview and verification actions */
+
+.cert-actions {
+  grid-column: 3;
+  grid-row: 1 / 4;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.cert-view {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border: 1px solid #345266;
+  border-radius: 5px;
+  background: #0d1b26;
+  color: var(--accent);
+  font: 11px/1.5 var(--font-mono);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.cert-view:hover {
+  border-color: var(--accent);
+  background: #19364a;
+}
+
+.cert-actions > .cert-meta {
+  display: block;
+  max-width: 130px;
+  font-size: 10px;
+}
+
+.credential-verify {
+  color: var(--accent);
+  font: 11px/1.6 var(--font-mono);
+  text-underline-offset: 4px;
+}
+
+.credential-verify:hover {
+  text-decoration: underline;
+}
+
+
+/* ==========================================================
+   8. NEXT-PAGE LINK AND FOOTER
+   ========================================================== */
+
+.edu-next {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin: 66px 0 54px;
+  padding: 32px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.edu-next .eyebrow {
+  margin-bottom: 12px;
+}
+
+.edu-next h2 {
+  font-size: 36px;
+}
+
+.education-theme .footer {
+  border-color: var(--border);
+  font-size: 11px;
+}
+
+
+/* ==========================================================
+   9. CERTIFICATE PREVIEW DIALOG
+   ========================================================== */
+
+.viewer-open {
+  overflow: hidden;
+}
+
+.certificate-modal {
+  width: min(1080px, 94vw);
+  height: 88vh;
+  max-height: 900px;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid #496b80;
+  border-radius: 10px;
+  background: #080e14;
+  color: var(--text);
+  box-shadow: 0 30px 100px #00000099;
+}
+
+.certificate-modal::backdrop {
+  background: #000000cc;
+  backdrop-filter: blur(6px);
+}
+
+.certificate-window {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.certificate-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.certificate-heading {
+  min-width: 0;
+}
+
+.certificate-heading h3 {
+  margin: 5px 0 0;
+  font-size: 19px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.certificate-header-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 10px;
+}
+
+.certificate-header-actions a,
+.certificate-header-actions button {
+  padding: 10px;
+  border: 1px solid #345266;
+  border-radius: 5px;
+  background: #10202c;
+  color: var(--accent);
+  font: 12px var(--font-mono);
+}
+
+.certificate-header-actions button {
+  font-size: 22px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.document-stage {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-height: 0;
+  overflow: auto;
+  background: #111a21;
+}
+
+.document-stage iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #ffffff;
+}
+
+.document-stage img {
+  display: block;
+  max-width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.viewer-help {
+  margin: 0;
+  padding: 10px 18px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 11px;
+}
+
+
+/* ==========================================================
+   10. TABLET LAYOUTS
+   ========================================================== */
+
+/* Move organisation filters above the certificate list. */
+
+@media (max-width: 900px) {
+  .credentials-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .certificate-sidebar .cert-filters {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .certificate-sidebar .cert-filters button {
+    width: auto;
+  }
+}
+
+
+/* Reduce academic card spacing on smaller screens. */
+
+@media (max-width: 850px) {
+  .education-intro {
+    gap: 35px;
+  }
+
+  .degree-feature {
+    grid-template-columns: 1fr 220px;
+  }
+
+  .degree-story {
+    padding: 28px;
+  }
+
+  .degree-topline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .score {
+    font-size: 85px;
+  }
+
+  .section-kicker {
+    display: none;
+  }
+
+  .cert-card {
+    column-gap: 16px;
+  }
+
+  .cert-card > strong {
+    font-size: 21px;
+  }
+}
+
+
+/* ==========================================================
+   11. MOBILE LAYOUTS
+   ========================================================== */
+
+@media (max-width: 600px) {
+
+  /* 11A. Introduction */
+
+  .education-intro {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 38px 0;
+  }
+
+  .education-intro h1 {
+    font-size: clamp(36px, 9vw, 49px);
+  }
+
+  .intro-aside {
+    justify-self: start;
+    max-width: none;
+  }
+
+  .intro-aside p {
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+
+
+  /* 11B. University degree card */
+
+  .degree-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .degree-story {
+    padding: 24px;
+  }
+
+  .degree-story h3 {
+    font-size: 36px;
+  }
+
+  .degree-score {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    justify-items: start;
+    gap: 4px 15px;
+    padding: 22px 24px;
+    border-top: 1px solid #35546a;
+    border-left: 0;
+  }
+
+  .degree-score .eyebrow {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+  }
+
+  .score {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    margin: 0;
+    font-size: 67px;
+    line-height: 1;
+    letter-spacing: -4px;
+  }
+
+  .score-scale {
+    grid-column: 1;
+    grid-row: 2;
+    font-size: 11px;
+  }
+
+  .score-caption {
+    display: none;
+  }
+
+
+  /* 11C. Earlier qualifications and headings */
+
+  .earlier-studies {
+    grid-template-columns: 1fr;
+  }
+
+  .study-card {
+    padding: 24px;
+  }
+
+  .education-theme .section-heading {
+    flex-direction: column;
+    align-items: start;
+    gap: 14px;
+  }
+
+  .education-theme h2 {
+    font-size: 33px;
+  }
+
+
+  /* 11D. Certificates */
+
+  .credentials-section {
+    padding-top: 48px;
+    scroll-margin-top: 160px;
+  }
+
+  .certificate-sidebar {
+    padding: 16px;
+  }
+
+  .cert-card {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 7px 15px;
+    padding: 24px 4px;
+  }
+
+  .cert-icon {
+    align-self: start;
+    width: 34px;
+    height: 34px;
+  }
+
+  .cert-card > strong {
+    font-size: 23px;
+  }
+
+  .cert-actions {
+    grid-column: 2;
+    grid-row: 4;
+    margin-top: 9px;
+  }
+
+  .cert-actions > .cert-meta {
+    max-width: none;
+  }
+
+
+  /* 11E. Next-page link */
+
+  .edu-next {
+    flex-direction: column;
+    align-items: start;
+    gap: 22px;
+    margin: 44px 0 32px;
+  }
+
+  .edu-next h2 {
+    font-size: 32px;
+  }
+
+
+  /* 11F. Certificate preview */
+
+  .certificate-header {
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .certificate-header .eyebrow {
+    font-size: 8px;
+  }
+
+  .certificate-heading h3 {
+    font-size: 15px;
+  }
+
+  .certificate-header-actions {
+    gap: 5px;
+  }
+
+  .certificate-header-actions a {
+    padding: 10px 7px;
+    font-size: 10px;
+  }
+
+  .certificate-modal {
+    width: 96vw;
+    height: 90vh;
+  }
+}
+
+
+/* ==========================================================
+   12. REDUCED MOTION
+   Respect the visitor's accessibility preference.
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .education-theme * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
