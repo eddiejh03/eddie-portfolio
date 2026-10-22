@@ -1,5 +1,47 @@
-/* Page components. Shared theme and navigation live in shared.css. */
-
-  /* NEW TOP PANEL NAVIGATION */
-  @media (max-width: 700px) {
-  }
+/* Experience components only. Theme and navigation come from shared.css. */
+.experience-theme { font-size: 16px; line-height: 1.7; }
+.experience-page { padding-top: 64px; padding-bottom: 48px; }
+.experience-intro { display: grid; grid-template-columns: 1.5fr 1fr; align-items: end; gap: 56px; padding-bottom: 56px; border-bottom: 1px solid var(--border); }
+.experience-theme h1, .experience-theme h2, .experience-theme h3 { font-family: var(--font-heading); font-weight: 400; letter-spacing: -.035em; }
+.experience-theme h1 { font-size: clamp(38px, 4.6vw, 64px); line-height: 1.12; margin: 0; }
+.experience-theme em { color: var(--accent); font-style: normal; }
+.experience-theme .eyebrow { color: var(--accent); font: 11px/1.6 var(--font-mono); letter-spacing: .15em; margin: 0 0 20px; }
+.experience-summary { color: var(--muted); margin: 0; max-width: 420px; }
+.work-section { padding-top: 40px; }
+.experience-section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.experience-section-heading h2 { font-size: 32px; margin: 0; }
+.experience-section-heading p { color: var(--muted); font-size: 12px; margin: 0; }
+.experience-list { display: grid; gap: 20px; }
+.experience-card { display: grid; grid-template-columns: 220px minmax(0,1fr); border: 1px solid var(--border); border-radius: 12px; background: var(--surface); overflow: hidden; }
+.experience-meta { padding: 32px; border-right: 1px solid var(--border); display: flex; flex-direction: column; align-items: flex-start; }
+.role-category { color: var(--accent); font: 10px/1.7 var(--font-mono); letter-spacing: .08em; }
+.experience-meta p { color: var(--muted); font-size: 12px; margin: 12px 0 28px; }
+.role-index { margin-top: auto; color: var(--muted); font: 36px/1 var(--font-heading); }
+.experience-details { padding: 32px 36px; min-width: 0; }
+.experience-org { color: var(--accent); font-size: 13px; margin: 0 0 8px; }
+.experience-details h3 { font-size: clamp(26px, 3vw, 34px); line-height: 1.2; margin: 0 0 16px; }
+.role-description { margin: 0 0 18px; color: var(--muted); }
+.experience-details ul { margin: 0 0 24px; padding-left: 20px; }
+.experience-details li { padding-left: 4px; margin: 8px 0; }
+.experience-details li::marker { color: var(--accent); }
+.experience-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.experience-tags span { padding: 5px 10px; border: 1px solid var(--border); border-radius: 20px; color: var(--muted); font-size: 11px; }
+.experience-next { display: flex; align-items: center; justify-content: space-between; gap: 28px; margin-top: 56px; padding-block: 32px; border-block: 1px solid var(--border); }
+.experience-next .eyebrow { margin-bottom: 10px; }
+.experience-next h2 { font-size: 32px; line-height: 1.2; margin: 0; }
+.experience-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.experience-button { display: inline-flex; align-items: center; justify-content: center; gap: 16px; min-height: 44px; padding: 10px 16px; border: 1px solid var(--border); border-radius: 6px; color: var(--accent); font-size: 13px; transition: background .2s, border-color .2s; }
+.experience-button:hover { background: var(--accent-soft); border-color: var(--accent); }
+.experience-footer { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding-bottom: 28px; color: var(--muted); font-size: 12px; }
+.experience-footer p { margin: 0; }
+@media(max-width: 760px) {
+ .experience-page { padding-top: 36px; }
+ .experience-intro { grid-template-columns: 1fr; gap: 24px; padding-bottom: 32px; }
+ .experience-section-heading { flex-direction: column; gap: 8px; }
+ .experience-card { grid-template-columns: 1fr; }
+ .experience-meta { padding: 20px 24px; border-right: 0; border-bottom: 1px solid var(--border); }
+ .experience-meta p { margin: 6px 0 0; }
+ .role-index { display: none; }
+ .experience-details { padding: 24px; }
+ .experience-next { align-items: flex-start; flex-direction: column; margin-top: 36px; }
+}
