@@ -1,52 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Education &amp; Qualifications — Eddie Wong</title>
-<meta name="description" content="Eddie Wong’s academic journey, qualifications, and professional certifications.">
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='night-orbit-2026') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='education.css', v='night-education-2026') }}">
-<style>
-  /* NEW TOP PANEL NAVIGATION */
-  .top-panel {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 20px;
-    background: rgba(3, 5, 7, 0.9);
-    border-bottom: 1px solid #17436950;
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    backdrop-filter: blur(8px);
-  }
-  .top-panel a {
-    color: #9edcff;
-    text-decoration: none;
-    font: 13px/1.5 Consolas, monospace;
-    letter-spacing: 1px;
-    transition: color 0.2s ease;
-  }
-  .top-panel a:hover {
-    color: #fff;
-  }
-  @media (max-width: 700px) {
-    .top-panel { gap: 15px; flex-wrap: wrap; }
-    .top-panel a { font-size: 11px; }
-  }
-</style>
-</head>
-<body class="education-theme" id="top">
-
-<!-- NEW TOP PANEL NAVIGATION -->
-<nav class="top-panel" aria-label="Main Navigation">
-  <a href="/">Home</a>
-  <a href="/education">Education</a>
-  <a href="/experience">Experience</a>
-  <a href="/resume">Résumé</a>
-  <a href="mailto:eddiejh03@gmail.com">Contact</a>
-</nav>
-
+{% extends "base.html" %}
+{% block title %}Education &amp; Qualifications — Eddie Wong{% endblock %}
+{% block page_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='shared-layout-1') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='education.css', v='shared-layout-1') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='experience.css', v='shared-layout-1') }}">
+{% endblock %}
+{% block body_attributes %} class="education-theme" id="top"{% endblock %}
+{% block content %}
 <main class="container education-page">
 <section class="education-intro" aria-labelledby="page-title">
 <div><p class="eyebrow">01 / EDUCATION &amp; QUALIFICATIONS</p><h1 id="page-title">Always learning.<br><em>Still becoming.</em></h1></div>
@@ -171,4 +131,4 @@
   });
 })();
 </script>
-</body></html>
+{% endblock %}

@@ -1,0 +1,35 @@
+/* Common design system. Change these tokens to update every page. */
+:root, body.education-theme {
+  color-scheme: dark;
+  --bg: #030507; --bg-secondary: #080e14; --panel: #0b141c;
+  --surface: #0b141c; --text: #edf4f9; --muted: #a4b4c1;
+  --accent: #9edcff; --blue: #9edcff; --accent-bright: #c7edff;
+  --accent-soft: #112838; --border: #253641; --line: #253641;
+  --font-heading: Georgia, 'Times New Roman', serif;
+  --serif: var(--font-heading); --font-mono: Consolas, monospace;
+  --sans: Arial, Helvetica, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--sans); }
+.container { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+a { color: inherit; text-decoration: none; }
+button, input, textarea { font: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
+[hidden] { display: none !important; }
+.portfolio-header { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border); background: rgba(3,5,7,.94); backdrop-filter: blur(16px); }
+.portfolio-nav { width: min(1160px, calc(100% - 48px)); min-height: 76px; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.portfolio-brand { color: var(--text); font: 22px/1.4 var(--font-heading); white-space: nowrap; }
+.portfolio-brand span { color: var(--accent); font: 16px var(--font-mono); margin-right: 8px; }
+.portfolio-links { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; }
+.portfolio-links a { display: inline-flex; align-items: center; min-height: 44px; border-bottom: 2px solid transparent; color: var(--muted); font: 13px/1.5 var(--sans); transition: color .2s, border-color .2s; }
+.portfolio-links a:hover, .portfolio-links a[aria-current="page"] { color: var(--accent); border-bottom-color: var(--accent); }
+.skip-link { position: fixed; top: 8px; left: 16px; z-index: 100; padding: 12px 18px; background: var(--accent); color: #030507; transform: translateY(-160%); }
+.skip-link:focus { transform: translateY(0); }
+@media (max-width: 700px) {
+ .portfolio-nav { width: calc(100% - 32px); flex-direction: column; align-items: flex-start; gap: 8px; padding-block: 14px 8px; }
+ .portfolio-links { gap: 8px 18px; width: 100%; }
+ .portfolio-links a { font-size: 12px; }
+ .container { width: calc(100% - 32px); }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+@media print { .portfolio-header, .skip-link { display: none !important; } }

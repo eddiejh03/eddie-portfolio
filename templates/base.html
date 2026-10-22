@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#030507">
+  <meta name="description" content="Eddie Wong’s personal portfolio: education, experience, and technology learning.">
+  <title>{% block title %}Eddie Wong — Portfolio{% endblock %}</title>
+  {% block page_styles %}{% endblock %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='shared.css', v='shared-layout-1') }}">
+</head>
+<body{% block body_attributes %}{% endblock %}>
+  <a class="skip-link" href="#page-content">Skip to content</a>
+  <header class="portfolio-header">
+    <div class="portfolio-nav">
+      <a class="portfolio-brand" href="/" aria-label="Eddie Wong home"><span aria-hidden="true">[ e. ]</span> Eddie Wong</a>
+      <nav class="portfolio-links" aria-label="Main navigation">
+        {% for path, label in [('/', 'Home'), ('/education', 'Education'), ('/experience', 'Experience'), ('/resume', 'Résumé')] %}
+        <a href="{{ path }}"{% if request.path == path %} aria-current="page"{% endif %}>{{ label }}</a>
+        {% endfor %}
+        <a href="mailto:eddiejh03@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <div id="page-content" tabindex="-1">{% block content %}{% endblock %}</div>
+</body>
+</html>
